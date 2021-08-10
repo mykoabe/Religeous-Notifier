@@ -33,11 +33,14 @@ const UserFields = {
         required:true,
 
     },
-    token:{
+    userRole :{
         type:String,
-        default:null
+        default:null,
+        required:true
     }
+   
 }
+
 
 
 const UserSchema = new mongoose.Schema(UserFields);

@@ -1,7 +1,7 @@
 import { 
     Signup , 
     Signin,
- } from "../Controller/MainController.js";
+ } from "../Controller/AuthController.js";
 
 import express from 'express'
 
