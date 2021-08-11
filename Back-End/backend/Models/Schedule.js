@@ -1,8 +1,16 @@
 import mongoose from "mongoose";
 
 const ScheduleFields = {  
+     createdby:{
+        type:String,
+        default : null,
+        required:true
+    },
+    dateofcreation:{
+        type:Date,
+        default:null, 
 
- 
+    },
     programs :{
         type:[],
         default:null,
@@ -10,6 +18,8 @@ const ScheduleFields = {
     }
     
 }
+
+
 
 const ScheduleSchema = mongoose.Schema(ScheduleFields);
 

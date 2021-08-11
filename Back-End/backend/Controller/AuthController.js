@@ -1,8 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcryptjs'
 import UserModel from "../Models/User.js";
-import mongoose from 'mongoose';
-import cookieParser from "cookie-parser";
 
 
 // Signup Controller 
@@ -60,7 +58,6 @@ export  const Signup = async (httprequest, httpresponse)=>{
         console.log(`error: ${error}`);
         
     }
-
 
 
 

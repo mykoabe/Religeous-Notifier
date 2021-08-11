@@ -2,7 +2,14 @@
 import express  from 'express'
 import databaseconfiguration from './Config/DatabaseConfig.js';
 import bodyParser from 'body-parser';
-import { authRoute } from './Routes/AllRoutes.js';
+
+import {
+     authRoute  ,
+     profileRoute,
+     scheduleRoute
+    } from './Routes/AllRoutes.js';
+
+    
 import { VerifyCurrentToken } from './Middleware/AuthMiddleware.js';
 import cookieParser from 'cookie-parser';
 
@@ -17,6 +24,9 @@ databaseconfiguration();
 
 
 app.use('/api' , authRoute);
+app.use('/api' , profileRoute);
+app.use('/api' , scheduleRoute )
+
 
 
 app.get('/' , VerifyCurrentToken ,(httprequest , httpresponse)=>{

@@ -7,6 +7,7 @@ const HolyplaceFields = {
         type:String,
         default:null,
         required:true,
+        
     },
     location :{
         type:String,
