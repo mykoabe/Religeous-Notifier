@@ -2,17 +2,15 @@ import { VerifyCurrentToken } from "./Middleware/AuthMiddleware.js";
 // import {errorHandler} from "./Middleware/error.js";
 import {databaseconfiguration} from './Config/DatabaseConfig.js'
 import express from 'express'
-import bodyParser from 'body-parser'
-import jwt from 'jsonwebtoken';
 import allroutes from './Routes/AllRoutes.js'
 
 databaseconfiguration();
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 
 
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.PORT || 4000;
 
 app.use("/api", allroutes);
 // app.use(errorHandler);
