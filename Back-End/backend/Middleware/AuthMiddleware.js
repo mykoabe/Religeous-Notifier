@@ -6,16 +6,13 @@ export const  VerifyCurrentToken = (req, res, next)=>{
 
    if (typeof tokeninheader !== 'undefined'){
        req.token = tokeninheader;
-
        jwt.verify(req.token  , process.env.JWT_KEY ,(err , authdata)=>{
         if(err){
           res.send(`${err}`);
-    
         }
         else {
             console.log(authdata);
        next();
-
         }
     
       } );
@@ -24,6 +21,4 @@ export const  VerifyCurrentToken = (req, res, next)=>{
    else{
        res.send("Provide token please!");    
    }
-
-
 }
