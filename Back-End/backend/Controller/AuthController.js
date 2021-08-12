@@ -10,23 +10,23 @@ export  const Signup = async (httprequest, httpresponse)=>{
 
     try {
 
-        // const fullName = httprequest.body.fullName;
+        const fullName = httprequest.body.fullName;
 
-        // const userName = httprequest.body.userName;
+        const userName = httprequest.body.userName;
 
-        // const emailAddress = httprequest.body.emailAddress;
+        const userEmailAddress = httprequest.body.emailAddress;
 
-        // const password = httprequest.body.password;
+        const password = httprequest.body.password;
 
-        // const confirmPassword = httprequest.body.confirmPassword;
+        const confirmPassword = httprequest.body.confirmPassword;
 
-        // const userRole = httprequest.body.userRole
+        const userRole = httprequest.body.userRole
         
-        // if (!(emailAddress && password && fullName && userName)) {
-        //     httpresponse.status(400).send("All input is required");
-        // }
+        if (!(userEmailAddress && password && fullName && userName)) {
+            httpresponse.status(400).send("All input is required");
+        }
 
-        const check_user = await  UserModel.findOne({ emailAddress });
+        const check_user = await  UserModel.findOne({ userEmailAddress });
       
         if (check_user) {
             return httpresponse.status(409).json("user already exist!");
@@ -42,7 +42,7 @@ export  const Signup = async (httprequest, httpresponse)=>{
 
             userName,
 
-            emailAddress: emailAddress.toLowerCase(), 
+            emailAddress: userEmailAddress.toLowerCase(), 
 
             password: encryptedPassword,
           
