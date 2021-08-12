@@ -9,7 +9,6 @@ const options = {
 
 const UserFields = {
 
-  
   fullName: {
     type: String,
     default: null,
@@ -46,8 +45,4 @@ const UserFields = {
 };
 
 
-const UserSchema = new mongoose.Schema(UserFields ,options ,{timestamps:true});
-const UserModel = mongoose.model("User", UserSchema);
-
- export default UserModel;
 

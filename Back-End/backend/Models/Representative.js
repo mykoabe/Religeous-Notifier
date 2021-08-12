@@ -23,5 +23,4 @@ const RepresentativeFields = {
 }
 
 
-const RepresentativeModel = UserModel.discriminator('Representative', new mongoose.Schema(RepresentativeFields));
-export default RepresentativeModel;
+

@@ -16,7 +16,6 @@ export const  VerifyCurrentToken = (req, res, next)=>{
         }
     
       } );
-
    }
    else{
        res.send("Provide token please!");    
