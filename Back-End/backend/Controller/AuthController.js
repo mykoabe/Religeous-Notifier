@@ -3,6 +3,8 @@ import bcryptjs from 'bcryptjs'
 import UserModel from '../Models/User.js';
 import RepresentativeModel from '../Models/Representative.js';
 import AppUserModel from '../Models/AppUser.js';
+import dotenv from 'dotenv'
+dotenv.config()
 
 // Signup Controller 
 
@@ -86,45 +88,6 @@ export  const Signup = async (httprequest, httpresponse)=>{
 
 
 // Login Controller
-
-export  const Signin = async (httprequest, httpresponse)=>{
-
-        try{
-            const {emailAddress , password} = httprequest.body;
-
-            if (!(emailAddress && password)) {
-
-                httpresponse.status(400).send("All input is required");
-
-              }
-        
-
-            const currentUser = await UserModel.findOne({emailAddress});
-            const check_password = await bcryptjs. compare(password , currentUser.password);
-            
-            if (currentUser && check_password){
-
-                const Generate_Token = jwt.sign(
-                    {currentUser}, 
-                    "my_key" , 
-                    {
-                        expiresIn:"2h"
-                    }
-                );
-                console.log("Succesfully Logged In");
-                httpresponse.status(200).json({"access_token":Generate_Token , "currentuser":currentUser});
-            }
-            else{
-
-            return httpresponse.status(400).json( {"errormessage": "Invalid Credentials"});
-            }
-
-        }catch(error_occured){
-            console.log(error_occured);
-        }
-
-
-}
 
 
 export const getallusers = async (httpreq, httpres) => {
