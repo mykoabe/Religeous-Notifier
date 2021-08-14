@@ -16,7 +16,7 @@ export  const Signup = async (httprequest, httpresponse)=>{
 
         const userName = httprequest.body.userName;
 
-        const userEmailAddress = httprequest.body.emailAddress;
+        const email = httprequest.body.emailAddress;
 
         const password = httprequest.body.password;
 
@@ -24,11 +24,11 @@ export  const Signup = async (httprequest, httpresponse)=>{
 
         const userRole = httprequest.body.userRole
         
-        if (!(userEmailAddress && password && fullName && userName)) {
-            httpresponse.status(400).send("All input is required");
+        if (!(email && password && fullName && userName)) {
+            httpresponse.status(400).send("All input are required");
         }
 
-        const check_user = await  UserModel.findOne({ userEmailAddress });
+        const check_user = await  UserModel.findOne({ email });
       
         if (check_user) {
             return httpresponse.status(409).json("user already exist!");
@@ -44,7 +44,7 @@ export  const Signup = async (httprequest, httpresponse)=>{
 
             userName,
 
-            emailAddress: userEmailAddress.toLowerCase(), 
+            emailAddress: email.toLowerCase(), 
 
             password: encryptedPassword,
           
@@ -88,43 +88,7 @@ export  const Signup = async (httprequest, httpresponse)=>{
 
 
 // Login Controller
-export  const Signin = async (httprequest, httpresponse)=>{
 
-  try{
-      const {emailAddress , password} = httprequest.body;
-
-      if (!(emailAddress && password)) {
-
-          httpresponse.status(400).send("All input is required");
-
-        }
-  
-
-      const currentUser = await UserModel.findOne({emailAddress});
-      const check_password = await bcryptjs. compare(password , currentUser.password);
-      if (currentUser && check_password){
-
-          const Generate_Token = jwt.sign(
-              {currentUser}, 
-              process.env.JWT_KEY, 
-              {
-                  expiresIn:"2h"
-              }
-          );
-          console.log("Succesfully Logged In");
-          httpresponse.status(200).json({"access_token":Generate_Token , "currentuser":currentUser});
-      }
-      else{
-
-      return httpresponse.status(400).json( {"errormessage": "Invalid Credentials"});
-      }
-
-  }catch(error_occured){
-      console.log(error_occured);
-  }
-
-
-}
 
 
 
