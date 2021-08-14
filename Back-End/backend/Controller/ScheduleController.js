@@ -1,7 +1,6 @@
 import ScheduleModel from "../Models/Schedule.js";
 
 
-
 export const createSchedule = async(httpreq, httpres) =>{
 
     try {
@@ -17,10 +16,8 @@ export const createSchedule = async(httpreq, httpres) =>{
         
     }
 
-
 }
 
- 
 export const deleteSchedule = async(httpreq, httpres) =>{
 
     try {

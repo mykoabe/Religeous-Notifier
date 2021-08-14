@@ -35,7 +35,6 @@ export  const Signup = async (httprequest, httpresponse)=>{
        
         const  encryptedConfirmPassword = await bcrypt.hash(confirmPassword, 10);
 
-
         const newUser = await UserModel.create({
 
             fullName,
@@ -51,9 +50,10 @@ export  const Signup = async (httprequest, httpresponse)=>{
             userRole
 
           });
+
     
-        
-        return  httpresponse.status(201).json(`successfully Registered \n ${newUser}`);
+        console.log("Succesfully Registered!");
+        return  httpresponse.status(201).json(newUser);
     } catch (error) {
         console.log(`error: ${error}`);
         

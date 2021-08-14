@@ -3,8 +3,6 @@ import UserModel from "../Models/User.js";
 
 // Update User Account
 
-
-
 export const updateProfile = async(httpreq, httpres)=>{
 
     try {

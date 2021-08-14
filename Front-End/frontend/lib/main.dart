@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/Screens/HomePage.dart';
+import 'bloc_observer.dart';
 
 void main() {
+  Bloc.observer = MyObserver();
   runApp(AppStarter());
 }
 
@@ -12,11 +16,7 @@ class AppStarter extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Religious Daily Schedule Notifer app",
-      home: Center(
-        child: Text(
-          "Advanced Mobile Programming, Final Project",
-        ),
-      ),
+      home: HomePage(),
     );
   }
 }
