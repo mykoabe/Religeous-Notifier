@@ -11,6 +11,9 @@ import 'package:frontend/ApplicationState/Bloc/Login/Login_event.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/Login_state.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/Login_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
 
 class LoginController extends StatelessWidget {
   const LoginController({Key? key}) : super(key: key);
@@ -65,21 +68,45 @@ class Login extends StatelessWidget {
               ),
             ),
           ),
-          BlocBuilder<LoginBloc, LoginState>(builder: (_, state) {
-            if (state is Loging) {
-              return SpinKitDualRing(
-                color: Colors.black,
-                size: 50,
-              );
-            }
-            if (state is Logedin) {
-              return Text("You have successfully Logedin!");
-            }
-            if (state is FaildLoging) {
-              return Text("Failed!");
-            }
-            return Text("");
-          }),
+          BlocListener(
+            bloc: BlocProvider.of<LoginBloc>(context),
+            listener: (BuildContext context, LoginState state) {
+              if (state is Logedin) {
+                var currentuser = state.loggedinUserinfo.tojson();
+                String role = currentuser['userRole'];
+
+                if (role == "Representative") {
+                  Navigator.pushNamed(context, '/repmainscreen');
+                } else if (role == "user") {
+                  Navigator.pushNamed(context, '/mainscreen');
+                }else if(role == "Admin"){
+                  Navigator.pushNamed(context, '/adminpage');
+
+
+                }
+              }
+            },
+            child: BlocBuilder(
+              bloc: BlocProvider.of<LoginBloc>(context),
+              builder: (BuildContext context, LoginState state) {
+                if (state is Loging) {
+                  return SpinKitDualRing(
+                    color: Colors.black,
+                    size: 50,
+                  );
+                }
+                if (state is Logedin) {
+                  print(state.access_token);
+                  print(state.loggedinUserinfo.tojson());
+                  return Text("loggedin");
+                }
+                if (state is FaildLoging) {
+                  return Text("Failed!");
+                }
+                return Text("");
+              },
+            ),
+          ),
         ],
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/Repository/MainRepository.dart';
+import 'package:frontend/Models/User.dart';
 
 import 'Login_event.dart';
 import 'Login_state.dart';
@@ -14,13 +15,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield Loging();
 
       try {
-        String incommingvalue =
+        Map<String, dynamic> incommingvalue =
             await AuthRepository.LoginUserRepo(event.loginModel);
-        if (incommingvalue == "Invalid Credentials") {
-          yield FaildLoging();
-        } else {
-          yield Logedin(incommingvalue);
-        }
+
+        User user = User(incommingvalue['currentuser']['emailAddress'],
+            incommingvalue['currentuser']['password'],
+            fullName: incommingvalue['currentuser']['fullName'],
+            userName: incommingvalue['currentuser']['userName'],
+            userRole: incommingvalue['currentuser']['userRole']);
+
+        yield Logedin(user, incommingvalue['access_token']);
       } catch (e) {
         yield FaildLoging();
       }

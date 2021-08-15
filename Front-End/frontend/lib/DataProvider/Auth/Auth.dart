@@ -31,8 +31,8 @@ class ClientAuthDataProvider {
 
 // login User
 
-  static Future<String> login(LoginModel loginModel) async {
-    String finalvalue = "";
+  static Future<Map<String, dynamic>> login(LoginModel loginModel) async {
+    var finalvalue;
 
     try {
       final httpresponse = await http.post(
@@ -40,9 +40,9 @@ class ClientAuthDataProvider {
           body: loginModel.tojson());
 
       if (httpresponse.statusCode == 200) {
-        finalvalue = jsonDecode(httpresponse.body).toString();
-      } else {
-        finalvalue = "Invalid Credentials";
+        finalvalue = jsonDecode(httpresponse.body);
+      } else if (httpresponse.statusCode == 400) {
+        finalvalue = jsonDecode(httpresponse.body);
       }
     } catch (e) {
       print(e);

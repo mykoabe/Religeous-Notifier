@@ -13,7 +13,7 @@ class AuthRepository {
 
   //Login Repo
 
-  static Future<String> LoginUserRepo(LoginModel loginModel) async {
+  static Future<Map<String, dynamic>> LoginUserRepo(LoginModel loginModel) async {
     return await ClientAuthDataProvider.login(loginModel);
   }
 

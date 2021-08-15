@@ -61,9 +61,9 @@ class Register extends StatelessWidget {
                   User newuser = User(
                     controller1.text.toString(),
                     controller2.text.toString(),
-                    userName: "Flutter",
-                    fullName: "Flutter Client",
-                    userRole: "normal-user",
+                    userName: " Eharry ",
+                    fullName: "Hailemariam Fikadie",
+                    userRole: "Admin",
                     confirmPassword: controller3.text.toString(),
                   );
 

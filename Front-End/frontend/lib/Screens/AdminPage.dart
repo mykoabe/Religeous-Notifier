@@ -7,10 +7,8 @@ import 'package:frontend/ApplicationState/Bloc/Login/Login_bloc.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/Login_event.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/Login_state.dart';
 
-
-
-class MainScreen extends StatelessWidget {
-  MainScreen({Key? key}) : super(key: key);
+class AdminPage extends StatelessWidget {
+  AdminPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,9 @@ class MainScreen extends StatelessWidget {
         body: Column(
           children: [
             Container(
-              child: Center(child: Text("Dear User,Succefully Logged In."),),
+              child: Center(
+                child: Text("Dear Admin, Well come back."),
+              ),
             ),
           ],
         ));

@@ -9,8 +9,8 @@ import 'package:frontend/ApplicationState/Bloc/Login/Login_state.dart';
 
 
 
-class MainScreen extends StatelessWidget {
-  MainScreen({Key? key}) : super(key: key);
+class RepMainScreen extends StatelessWidget {
+  RepMainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class MainScreen extends StatelessWidget {
         body: Column(
           children: [
             Container(
-              child: Center(child: Text("Dear User,Succefully Logged In."),),
+              child: Center(child: Text("Dear Rep.., Succefully Logged In. "),),
             ),
           ],
         ));

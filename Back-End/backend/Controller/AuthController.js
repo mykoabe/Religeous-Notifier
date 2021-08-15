@@ -82,7 +82,9 @@ export const Signin = async (httprequest, httpresponse)=>{
         
 
             const currentUser = await UserModel.findOne({emailAddress});
-            if (currentUser && bcrypt.compare(password , currentUser.password)){
+            const check_password = await bcrypt.compare(password , currentUser.password);
+            
+            if (currentUser && check_password){
 
                 const Generate_Token = jwt.sign(
                     {currentUser}, 
@@ -95,7 +97,7 @@ export const Signin = async (httprequest, httpresponse)=>{
             }
             else{
 
-            return httpresponse.status(400).send("Invalid Credentials");
+            return httpresponse.status(400).json( {"errormessage": "Invalid Credentials"});
             }
 
         }catch(error_occured){
