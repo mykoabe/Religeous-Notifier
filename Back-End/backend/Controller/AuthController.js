@@ -89,7 +89,43 @@ export  const Signup = async (httprequest, httpresponse)=>{
 
 // Login Controller
 
+export  const Login = async (httprequest, httpresponse)=>{
 
+  try{
+      const {emailAddress , password} = httprequest.body;
+
+      if (!(emailAddress && password)) {
+
+          httpresponse.status(400).send("All input is required");
+
+        }
+  
+
+      const currentUser = await UserModel.findOne({emailAddress});
+      const check_password = await bcryptjs. compare(password , currentUser.password);
+      if (currentUser && check_password){
+
+          const Generate_Token = jwt.sign(
+              {currentUser}, 
+              process.env.JWT_KEY, 
+              {
+                  expiresIn:"2h"
+              }
+          );
+          console.log("Succesfully Logged In");
+          httpresponse.status(200).json({"access_token":Generate_Token , "currentuser":currentUser});
+      }
+      else{
+
+      return httpresponse.status(400).json( {"errormessage": "Invalid Credentials"});
+      }
+
+  }catch(error_occured){
+      console.log(error_occured);
+  }
+
+
+}
 
 
 export const getallusers = async (httpreq, httpres) => {

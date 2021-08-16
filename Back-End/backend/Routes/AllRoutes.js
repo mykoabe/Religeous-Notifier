@@ -1,4 +1,4 @@
-import { Signup, Signin , getallusers } from "../Controller/AuthController.js";
+import { Signup, Login , getallusers } from "../Controller/AuthController.js";
 import { deleteProfile, updateProfile } from "../Controller/ProfileController.js";
 import { createSchedule, deleteSchedule, getallSchedules, updateSchedule } from "../Controller/ScheduleController.js";
 import {createHolyPlace , getAllHolyPlaces} from "../Controller/HolyplaceController.js"
@@ -12,7 +12,7 @@ const allroutes = express.Router() ;
 
 allroutes.post("/RegisterUser", Signup);
 
-allroutes.post("/LoginUser", Signin);
+allroutes.post("/LoginUser", Login);
 
 // Profile allroutes
 

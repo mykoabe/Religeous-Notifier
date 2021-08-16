@@ -1,13 +1,13 @@
 import jwt from "jsonwebtoken";
-
+import dotenv from 'dotenv'
+dotenv.config()
 export const  VerifyCurrentToken = (req, res, next)=>{
-   console.log("Request has juss comming....")
    const tokeninheader  = req.headers.authorization;
 
    if (typeof tokeninheader !== 'undefined'){
        req.token = tokeninheader;
 
-       jwt.verify(req.token  , 'my_key' ,(err , authdata)=>{
+       jwt.verify(req.token  , process.env.JWT_KEY ,(err , authdata)=>{
         if(err){
           res.send(`${err}`);
     
@@ -22,7 +22,7 @@ export const  VerifyCurrentToken = (req, res, next)=>{
 
    }
    else{
-       res.send("Can't get token!");    
+       res.send("Provide token please!");    
    }
 
 
