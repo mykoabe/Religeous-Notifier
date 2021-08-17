@@ -1,12 +1,11 @@
-import jwt from "jsonwebtoken";
+const jwt = require("jsonwebtoken");
 
-
-export const VerifyCurrentToken = (req, res, next)=>{
+exports.VerifyCurrentToken = (req, res, next)=>{
     let token = req.headers['authorization'].split(" ")[1];
 
     if(!(token)){
         console.log(token);
-        return res.status(403).send("A token is required for authentication");
+        next(new ErrorResponse("A token is required for authentication"))
     }
     try {
          jwt.verify(token, "my_key", (error, authdata) => {
@@ -14,8 +13,7 @@ export const VerifyCurrentToken = (req, res, next)=>{
          });
      
       } catch (err) {
-
-        return res.status(401).send(`Invalid Token ${token}`);
+        next(new ErrorResponse(`Invalid Token ${token}`));
     }   
     return next();
 

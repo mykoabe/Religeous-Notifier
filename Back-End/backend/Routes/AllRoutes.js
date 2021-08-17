@@ -1,51 +1,44 @@
-import { 
-    Signup , 
-    Signin,
- } from "../Controller/AuthController.js";
+const { Signup, Signin } = require("../Controller/AuthController");
+const {
+  deletePofile,
+  updateProfile,
+} = require("../Controller/ProfileController");
+const {
+  createSchedule,
+  deleteSchedule,
+  getallSchedules,
+  updateSchedule,
+} = require("../Controller/ScheduleController");
+const express = require("express");
+const { VerifyCurrentToken } = require("../Middleware/AuthMiddleware");
 
- import { 
-     deletePofile,
-    updateProfile 
-    } from "../Controller/ProfileController.js";
- import {
-      createSchedule, 
-     deleteSchedule,
-     getallSchedules,
-     updateSchedule 
-    } from "../Controller/ScheduleController.js";
+// Auth Router
 
-import express from 'express'
-import { VerifyCurrentToken } from "../Middleware/AuthMiddleware.js";
-// Auth Router 
+const authRoute = express.Router();
 
+authRoute.post("/RegisterUser", Signup);
 
-
-
-
-export const authRoute = express.Router();
-
-authRoute.post('/RegisterUser',  Signup);
-
-authRoute.post('/LoginUser',   Signin);
-
+authRoute.post("/LoginUser", Signin);
 
 // Profile Router
 
-export const profileRoute = express.Router();
+const profileRoute = express.Router();
 
-profileRoute.delete('/DeleteProfile' ,VerifyCurrentToken ,deletePofile);
+profileRoute.delete("/DeleteProfile", VerifyCurrentToken, deletePofile);
 
-profileRoute.put('/UpdateProfile' , updateProfile);
+profileRoute.put("/UpdateProfile", updateProfile);
 
 //ScheduleRoute
 
-export const scheduleRoute = express.Router();
+const scheduleRoute = express.Router();
 
-scheduleRoute.post('/createSchedule' , createSchedule);
+scheduleRoute.post("/createSchedule", createSchedule);
 
-scheduleRoute.delete('/deleteSchedule/:id?' ,deleteSchedule);
+scheduleRoute.delete("/deleteSchedule/:id?", deleteSchedule);
 
-scheduleRoute.put('/updateSchedule' , updateSchedule)
+scheduleRoute.put("/updateSchedule", updateSchedule);
 
-scheduleRoute.get('/getallSchedules' , getallSchedules )
-
+scheduleRoute.get("/getallSchedules", getallSchedules);
+module.exports = authRoute;
+module.exports = profileRoute;
+module.exports = scheduleRoute;
