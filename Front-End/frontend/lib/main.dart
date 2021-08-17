@@ -5,15 +5,10 @@ import 'package:frontend/Screens/AdminPage.dart';
 import 'package:frontend/Screens/HomePage.dart';
 import 'package:frontend/Screens/MainScreen.dart';
 import 'package:frontend/Screens/RepMainScreen.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
+
 
 import 'package:frontend/ApplicationState/Bloc/Login/Login_bloc.dart';
-import 'package:frontend/ApplicationState/Bloc/Login/Login_event.dart';
-import 'package:frontend/ApplicationState/Bloc/Login/Login_state.dart';
 
-import 'package:frontend/ApplicationState/Bloc/Register/Register_State.dart';
-import 'package:frontend/ApplicationState/Bloc/Register/Register_event.dart';
 import 'package:frontend/ApplicationState/Bloc/Register/Register_bloc.dart';
 
 import 'bloc_observer.dart';

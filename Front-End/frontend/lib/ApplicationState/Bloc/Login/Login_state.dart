@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/Models/User.dart';
 
 class LoginState extends Equatable {
@@ -13,9 +13,9 @@ class FaildLoging extends LoginState {}
 
 class Logedin extends LoginState {
 
-  User loggedinUserinfo;
+  final User loggedinUserinfo;
 
-  String access_token;
+  final String access_token;
 
   Logedin( this.loggedinUserinfo , this.access_token);
 

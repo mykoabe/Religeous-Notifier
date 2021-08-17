@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:frontend/Models/User.dart';
+// import 'package:frontend/Models/User.dart';
 import 'package:frontend/Models/LoginModel.dart';
 
 class LoginEvent extends Equatable {
@@ -8,7 +8,7 @@ class LoginEvent extends Equatable {
 }
 
 class LogingUserEvent extends LoginEvent {
-  LoginModel loginModel;
+  final LoginModel loginModel;
   LogingUserEvent(this.loginModel);
 
   @override

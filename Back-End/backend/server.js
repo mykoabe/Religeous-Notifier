@@ -35,5 +35,5 @@ process.on("unhandledRejection", (err, promise) => {
   console.log(`Error: ${err.message}`);
   server.close(() => process.exit(1));
 });
-// sudo lsof -i :3000
+// sudo lsof -i :3500
 //kill -9 {PID} to kill if the port is used by another process

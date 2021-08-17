@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:frontend/Models/User.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterEvent extends Equatable {
   @override

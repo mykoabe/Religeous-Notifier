@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:equatable/equatable.dart';
 import 'package:frontend/Models/User.dart';
 import 'package:frontend/Models/LoginModel.dart';
 

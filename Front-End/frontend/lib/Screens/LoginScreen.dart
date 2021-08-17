@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/Login_bloc.dart';
-import 'package:frontend/Screens/MainScreen.dart';
+// import 'package:frontend/Screens/MainScreen.dart';
 import 'package:frontend/Widgets/Button.dart';
 import 'package:frontend/Widgets/CustomTextField.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
+// import 'package:equatable/equatable.dart';
 import 'package:frontend/Models/LoginModel.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/Login_event.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/Login_state.dart';
-import 'package:frontend/ApplicationState/Bloc/Login/Login_bloc.dart';
+// import 'package:frontend/ApplicationState/Bloc/Login/Login_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get_core/get_core.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:get/get.dart';
+// import 'package:get/get_core/get_core.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:get/get.dart';
 
 // class LoginController extends StatelessWidget {
 //   const LoginController({Key? key}) : super(key: key);
@@ -29,8 +29,8 @@ import 'package:get/get.dart';
 
 class Login extends StatelessWidget {
   Login({Key? key}) : super(key: key);
-  var controller1 = TextEditingController();
-  var controller2 = TextEditingController();
+  final controller1 = TextEditingController();
+  final controller2 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

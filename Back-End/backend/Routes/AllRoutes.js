@@ -14,31 +14,26 @@ const { VerifyCurrentToken } = require("../Middleware/AuthMiddleware");
 
 // Auth Router
 
-const authRoute = express.Router();
+const router = express.Router();
 
-authRoute.post("/RegisterUser", Signup);
+router.post("/RegisterUser", Signup);
 
-authRoute.post("/LoginUser", Signin);
+router.post("/LoginUser", Signin);
 
 // Profile Router
 
-const profileRoute = express.Router();
+router.delete("/DeleteProfile", VerifyCurrentToken, deletePofile);
 
-profileRoute.delete("/DeleteProfile", VerifyCurrentToken, deletePofile);
-
-profileRoute.put("/UpdateProfile", updateProfile);
+router.put("/UpdateProfile", updateProfile);
 
 //ScheduleRoute
 
-const scheduleRoute = express.Router();
+router.post("/createSchedule", createSchedule);
 
-scheduleRoute.post("/createSchedule", createSchedule);
+router.delete("/deleteSchedule/:id?", deleteSchedule);
 
-scheduleRoute.delete("/deleteSchedule/:id?", deleteSchedule);
+router.put("/updateSchedule", updateSchedule);
 
-scheduleRoute.put("/updateSchedule", updateSchedule);
+router.get("/getallSchedules", getallSchedules);
 
-scheduleRoute.get("/getallSchedules", getallSchedules);
-module.exports = authRoute;
-module.exports = profileRoute;
-module.exports = scheduleRoute;
+module.exports = router;
