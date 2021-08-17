@@ -8,7 +8,7 @@ class AccountSetting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var loginstate = BlocProvider.of<LoginBloc>(context);
+    var currentLoggedInState = BlocProvider.of<LoginBloc>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -22,8 +22,8 @@ class AccountSetting extends StatelessWidget {
       ),
       body: Container(
         child: BlocBuilder(
-            bloc: loginstate,
-            builder: (BuildContext context, LoginState state) {
+            bloc: currentLoggedInState,
+            builder: (BuildContext context, currentLoggedInState state) {
               print("rebuild");
               if (state is Logedin) {
                 return Column(
@@ -50,7 +50,6 @@ class AccountSetting extends StatelessWidget {
                       child: ElevatedButton(
                         child: Text("Delete Account"),
                         onPressed: () {
-                          print("Deleted event added!");
                           User user =
                               User(state.loggedinUserinfo.emailAddress, "");
                           BlocProvider.of<LoginBloc>(context)
