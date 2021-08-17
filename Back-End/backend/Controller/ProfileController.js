@@ -6,13 +6,13 @@ import UserModel from "../Models/User.js";
 export const updateProfile = async (httpreq, httpres) =>{
   try {
 
-    const getupdateinfo = httpreq.body;
+    const updateInfo = httpreq.body;
     const checkuser = await UserModel.findOne({
-      emailAddress: getupdateinfo.emailAddress,
+      emailAddress: updateInfo.emailAddress,
     });
     console.log(checkuser);
     if (checkuser) {
-      await  UserModel.updateOne(checkuser, { $set: getupdateinfo });
+      await  UserModel.updateOne(checkuser, { $set: updateInfo });
       return httpres.status(201).send("Succesfully updated!");
     } else {
       return httpres.status(400).send("User doesnt exist");

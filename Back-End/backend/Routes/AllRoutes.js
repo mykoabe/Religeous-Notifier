@@ -1,5 +1,5 @@
 import { Signup, Signin , getallusers } from "../Controller/AuthController.js";
-import { deletePofile, updateProfile } from "../Controller/ProfileController.js";
+import { deleteProfile, updateProfile } from "../Controller/ProfileController.js";
 import { createSchedule, deleteSchedule, getallSchedules, updateSchedule } from "../Controller/ScheduleController.js";
 import {createHolyPlace , getAllHolyPlaces} from "../Controller/HolyplaceController.js"
 import { Subscribe  , unSubscribe} from "../Controller/SubscriptionController.js";
@@ -16,7 +16,7 @@ allroutes.post("/LoginUser", Signin);
 
 // Profile allroutes
 
-allroutes.delete("/DeleteProfile", VerifyCurrentToken, deletePofile);
+allroutes.delete("/DeleteProfile", VerifyCurrentToken, deleteProfile);
 
 allroutes.put("/UpdateProfile", updateProfile);
 allroutes.get("/getAllUsers" ,getallusers )

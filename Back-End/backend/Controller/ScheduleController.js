@@ -5,13 +5,13 @@ import RepresentativeModel  from "../Models/Representative.js";
 export const createSchedule = async (httpreq, httpres) => {
   
   try {
-    const getPostedSchedule = httpreq.body;
-    const schedule = new ScheduleModel(getPostedSchedule);
+    const postedSchedule = httpreq.body;
+    const schedule = new ScheduleModel(postedSchedule);
     await schedule.save();
     console.log(schedule);
 
     const creator = await RepresentativeModel.findById({
-      _id: getPostedSchedule.createdby,
+      _id: postedSchedule.createdby,
     });
     creator.postedSchedules.push(schedule);
     await creator.save();
@@ -29,16 +29,16 @@ export const createSchedule = async (httpreq, httpres) => {
 };
 
 
-export const deleteSchedule = async (httpreq, httpres) => {
+export const deleteProfile = async (httpreq, httpres) => {
   try {
     const getparams = httpreq.query.id;
 
-    const finalparam = getparams.slice(10, getparams.length - 2);
+    const finalParameter = getparams.slice(10, getparams.length - 2);
 
-    const findSchedule = await ScheduleModel.findById({ _id: finalparam });
+    const findSchedule = await ScheduleModel.findById({ _id: finalParameter });
 
     if (findSchedule) {
-      await ScheduleModel.deleteOne({ _id: finalparam });
+      await ScheduleModel.deleteOne({ _id: finalParameter });
       return httpres.json({ Message: "Succesfully Deleted" });
     }
 
@@ -50,14 +50,14 @@ export const deleteSchedule = async (httpreq, httpres) => {
 
 export const updateSchedule = async (httpreq, httpres) => {
   try {
-    const getupdateddata = httpreq.body;
+    const updateInfo = httpreq.body;
 
     const checkSchedule = await ScheduleModel.findOne({
-      _id: getupdateddata._id,
+      _id: updateInfo._id,
     });
 
     if (checkSchedule) {
-      await ScheduleModel.updateOne(checkSchedule, { $set: getupdateddata });
+      await ScheduleModel.updateOne(checkSchedule, { $set: updateInfo });
       return httpres.status(201).send("Succesfully updated!");
     } else {
       return httpres.status(400).send("Schedule Doesnt exist");
