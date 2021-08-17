@@ -10,14 +10,14 @@ class ClientAuthDataProvider {
 // RegisterUser DataProvider
 
   static Future<User> register(User user) async {
-    User currentuser = User("", "");
+    User getCurrentUser = User("", "");
     try {
       final httpresponse = await http.post(
           Uri.parse('http://localhost:3500/api/RegisterUser'),
           body: user.tojson());
       if (httpresponse.statusCode == 201) {
         var incommingvalue = jsonDecode(httpresponse.body);
-        currentuser = User(
+        getCurrentUser = User(
           incommingvalue['emailAddress'],
           incommingvalue['password'],
           userName: incommingvalue['userName'],
@@ -31,7 +31,7 @@ class ClientAuthDataProvider {
       print(e.toString());
     }
 
-    return currentuser;
+    return getCurrentUser;
   }
 
 // Login DataProvider

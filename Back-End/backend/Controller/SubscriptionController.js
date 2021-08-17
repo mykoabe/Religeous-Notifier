@@ -4,9 +4,9 @@ import UserModel from "../Models/User.js";
 export const Subscribe = async (httpreq, httpres) => {
     try {
       
-        const getSubscriberInfo = httpreq.body;
-        const representativeid = getSubscriberInfo['representativeid'];
-        const appuserid = getSubscriberInfo['appuserid']
+        const subscriberInfo = httpreq.body;
+        const representativeid = subscriberInfo['representativeid'];
+        const appuserid = subscriberInfo['appuserid']
 
         const checkuser = await UserModel.findOne({
             _id: representativeid,
@@ -41,39 +41,7 @@ export const Subscribe = async (httpreq, httpres) => {
     }
 };
 
-export const unSubscribe = async (httpreq, httpres) => {
 
-  try {
-    const getSubscriberInfo = httpreq.body;
-    const representativeid = getSubscriberInfo['representativeid'];
-    const appuserid = getSubscriberInfo['appuserid']
-    const checkuser = await UserModel.findOne({
-        _id: representativeid,
-      });
-    if( checkuser){
-        const getAppUser = await UserModel.findOne({
-            _id:appuserid ,
-          });
-       
-
-            checkuser.allsubscriber.pull(getAppUser);
-            await checkuser.save()
-            getAppUser.allsubscription.pull(checkuser);
-            await getAppUser.save();
-    
-          return httpres.status(201).json({ message: " Sucessfully UnSubscribe" });
-    }
-
-        return httpres
-          .status(400)
-          .json({ message: "failed" });
-    
-} catch (error) {
-
-    console.log(error);
-    
-}
-};
 
 
 
