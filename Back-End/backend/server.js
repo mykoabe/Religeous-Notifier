@@ -5,12 +5,14 @@ const AllRoutes = require("./Routes/AllRoutes");
 const { VerifyCurrentToken } = require("./Middleware/AuthMiddleware");
 const cookieParser = require("cookie-parser");
 const errorHandler = require("./Middleware/error");
+var cors = require("cors");
 
 // load the env variables
 dotenv.config({ path: "./Config/config.env" });
 
 databaseconfiguration();
 const app = express();
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());

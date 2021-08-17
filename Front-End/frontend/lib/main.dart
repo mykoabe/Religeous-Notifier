@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/Screens/AccountSetting.dart';
-import 'package:frontend/Screens/AdminPage.dart';
-import 'package:frontend/Screens/HomePage.dart';
-import 'package:frontend/Screens/MainScreen.dart';
-import 'package:frontend/Screens/RepMainScreen.dart';
-
+// import 'package:frontend/Screens/AccountSetting.dart';
+// import 'package:frontend/Screens/AdminPage.dart';
+// import 'package:frontend/Screens/HomePage.dart';
+// import 'package:frontend/Screens/MainScreen.dart';
+// import 'package:frontend/Screens/RepMainScreen.dart';
 
 import 'package:frontend/ApplicationState/Bloc/Login/Login_bloc.dart';
 
 import 'package:frontend/ApplicationState/Bloc/Register/Register_bloc.dart';
+import 'package:frontend/generators/route_generator.dart';
 
 import 'bloc_observer.dart';
 
@@ -36,13 +36,7 @@ class AppStarter extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: "Religious Daily Schedule Notifer app",
         initialRoute: '/',
-        routes: {
-          '/': (context) => const HomePage(),
-          '/mainscreen': (context) => MainScreen(),
-          '/repmainscreen': (context) => RepMainScreen(),
-          '/adminpage': (context) => AdminPage(),
-          '/accountsettings': (context) => AccountSetting()
-        },
+        onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );
   }

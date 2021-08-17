@@ -29,8 +29,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Login extends StatelessWidget {
   Login({Key? key}) : super(key: key);
-  final controller1 = TextEditingController();
-  final controller2 = TextEditingController();
+  var controller1 = TextEditingController();
+  var controller2 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
