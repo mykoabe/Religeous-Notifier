@@ -1,7 +1,6 @@
-import ScheduleModel from "../Models/Schedule.js";
+const ScheduleModel = require('../Models/Schedule')
 
-
-export const createSchedule = async(httpreq, httpres) =>{
+exports.createSchedule = async(httpreq, httpres) =>{
 
     try {
         const getPostedSchedule = httpreq.body;
@@ -18,7 +17,7 @@ export const createSchedule = async(httpreq, httpres) =>{
 
 }
 
-export const deleteSchedule = async(httpreq, httpres) =>{
+exports.deleteSchedule = async(httpreq, httpres) =>{
 
     try {
         const getparams = httpreq.query.id;
@@ -50,7 +49,7 @@ export const deleteSchedule = async(httpreq, httpres) =>{
 }
 
  
-export const updateSchedule = async(httpreq, httpres) =>{
+exports.updateSchedule = async(httpreq, httpres) =>{
 
     try {
         const getupdateddata= httpreq.body;
@@ -78,7 +77,7 @@ export const updateSchedule = async(httpreq, httpres) =>{
 }
 
  
-export const getallSchedules = async(httpreq, httpres) =>{
+exports.getallSchedules = async(httpreq, httpres) =>{
 
     try {
 

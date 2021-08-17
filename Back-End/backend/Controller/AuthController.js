@@ -1,13 +1,13 @@
 const jwt = require("jsonwebtoken");
-const bcrypt = require('bcryptjs')
-import UserModel from "../Models/User.js";
+const bcrypt = require('bcryptjs');
+const UserModel = require("../Models/User")
 
 
 // Signup Controller 
-export  const Signup = async (httprequest, httpresponse)=>{
+exports.Signup = async (httprequest, httpresponse)=>{
 
     try {
-        
+
         const fullName = httprequest.body.fullName;
 
         const userName = httprequest.body.userName;
@@ -69,7 +69,7 @@ export  const Signup = async (httprequest, httpresponse)=>{
 
 // Login Controller
 
-export const Signin = async (httprequest, httpresponse)=>{
+exports.Signin = async (httprequest, httpresponse)=>{
 
         try{
             const {emailAddress , password} = httprequest.body;

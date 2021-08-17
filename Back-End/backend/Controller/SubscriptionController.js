@@ -1,16 +1,5 @@
-import ScheduleModel from "../Models/Schedule";
+const ScheduleModel = require("../models/Schedule");
 
+exports.SubScribetoSchedule = async () => {};
 
-export const SubScribetoSchedule = async()=>{
-     
-    
-
-
-}
-
-
-export const UnSubScribetoSchedule = async()=>{
-    
-    
-
-}
+exports.UnSubScribetoSchedule = async () => {};
