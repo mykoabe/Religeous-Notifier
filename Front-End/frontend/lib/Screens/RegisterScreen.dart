@@ -24,18 +24,25 @@ class RegisterController extends StatelessWidget {
   }
 }
 
-class Register extends StatelessWidget {
-  Register({Key? key}) : super(key: key);
+class Register extends StatefulWidget {
+  const Register({Key? key}) : super(key: key);
+
+  @override
+  _RegisterState createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
   var controller1 = TextEditingController();
   var controller2 = TextEditingController();
   var controller3 = TextEditingController();
-
+  String dropdownValue = 'user';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Register"),
-      ),
+          title: Text("Register"),
+          iconTheme: IconThemeData(color: Colors.black87),
+          backgroundColor: Colors.white),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -54,6 +61,34 @@ class Register extends StatelessWidget {
             textEditingController: controller2,
             icondata: Icon(Icons.password),
           ),
+          Container(
+              margin: EdgeInsets.only(right: 100),
+              child: Row(children: [
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 50),
+                    child: Text("Role"),
+                  ),
+                ),
+                DropdownButton<String>(
+                  value: dropdownValue,
+                  icon: const Icon(Icons.keyboard_arrow_down),
+                  iconSize: 24,
+                  style: const TextStyle(color: Colors.deepPurple),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                    });
+                  },
+                  items: <String>['user', 'Representative']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ])),
           Hero(
               tag: "Registertag",
               child: CustomRoundButton(
@@ -63,7 +98,7 @@ class Register extends StatelessWidget {
                     controller2.text.toString(),
                     userName: " Eharry ",
                     fullName: "Hailemariam Fikadie",
-                    userRole: "Admin",
+                    userRole: dropdownValue,
                     confirmPassword: controller3.text.toString(),
                   );
 
@@ -77,7 +112,6 @@ class Register extends StatelessWidget {
                 ),
               )),
           BlocBuilder<RegisterBloc, RegisterState>(builder: (_, state) {
-            
             if (state is Registering) {
               return SpinKitDualRing(
                 color: Colors.black,

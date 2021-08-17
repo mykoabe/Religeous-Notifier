@@ -5,6 +5,8 @@ import 'package:equatable/equatable.dart';
 import 'package:frontend/Models/User.dart';
 import 'package:frontend/Models/LoginModel.dart';
 
+//Genymotion emulator address 192.168.60.1
+
 class ClientAuthDataProvider {
   // Register User
 
@@ -49,5 +51,19 @@ class ClientAuthDataProvider {
     }
 
     return finalvalue;
+  }
+
+  static Future<String> deleteaccount(User user) async {
+    var result = "";
+
+    try {
+      //  final httpresponse = await http.delete(
+      //     Uri.parse('http://localhost:3500/api/DeleteProfile'),
+      //     body: user.tojson()
+      //     ,
+      //     headers: );
+
+    } catch (e) {}
+    return result;
   }
 }

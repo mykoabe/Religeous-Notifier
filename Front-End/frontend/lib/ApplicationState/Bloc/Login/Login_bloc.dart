@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/Repository/MainRepository.dart';
 import 'package:frontend/Models/User.dart';
@@ -28,6 +27,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       } catch (e) {
         yield FaildLoging();
       }
+    }
+
+    if (event is LogoutEvent) {
+      User logoutuser = User("", "",
+          fullName: "", confirmPassword: "", userRole: "", userName: "");
+      yield Logedin(logoutuser, "");
     }
   }
 }

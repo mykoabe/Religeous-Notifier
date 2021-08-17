@@ -15,17 +15,17 @@ import 'package:get/get_core/get_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 
-class LoginController extends StatelessWidget {
-  const LoginController({Key? key}) : super(key: key);
+// class LoginController extends StatelessWidget {
+//   const LoginController({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => LoginBloc(),
-      child: Login(),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocProvider(
+//       create: (_) => LoginBloc(),
+//       child: Login(),
+//     );
+//   }
+// }
 
 class Login extends StatelessWidget {
   Login({Key? key}) : super(key: key);
@@ -34,9 +34,13 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var loginbloc = BlocProvider.of<LoginBloc>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Login"),
+        iconTheme: IconThemeData(color: Colors.black87),
+        backgroundColor: Colors.white,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -69,7 +73,7 @@ class Login extends StatelessWidget {
             ),
           ),
           BlocListener(
-            bloc: BlocProvider.of<LoginBloc>(context),
+            bloc: loginbloc,
             listener: (BuildContext context, LoginState state) {
               if (state is Logedin) {
                 var currentuser = state.loggedinUserinfo.tojson();
@@ -79,15 +83,13 @@ class Login extends StatelessWidget {
                   Navigator.pushNamed(context, '/repmainscreen');
                 } else if (role == "user") {
                   Navigator.pushNamed(context, '/mainscreen');
-                }else if(role == "Admin"){
+                } else if (role == "Admin") {
                   Navigator.pushNamed(context, '/adminpage');
-
-
                 }
               }
             },
             child: BlocBuilder(
-              bloc: BlocProvider.of<LoginBloc>(context),
+              bloc: loginbloc,
               builder: (BuildContext context, LoginState state) {
                 if (state is Loging) {
                   return SpinKitDualRing(

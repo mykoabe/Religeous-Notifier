@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 
-import cookieParser from "cookie-parser";
 
 export const VerifyCurrentToken = (req, res, next)=>{
     let token = req.headers['authorization'].split(" ")[1];

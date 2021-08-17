@@ -8,12 +8,12 @@ class LoginEvent extends Equatable {
 }
 
 class LogingUserEvent extends LoginEvent {
-
   LoginModel loginModel;
   LogingUserEvent(this.loginModel);
 
   @override
   List<Object?> get props => [loginModel];
-
-  
 }
+
+class LogoutEvent extends LoginEvent {}
+

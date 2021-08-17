@@ -15,7 +15,7 @@ import {
     } from "../Controller/ScheduleController.js";
 
 import express from 'express'
-
+import { VerifyCurrentToken } from "../Middleware/AuthMiddleware.js";
 // Auth Router 
 
 
@@ -26,18 +26,16 @@ export const authRoute = express.Router();
 
 authRoute.post('/RegisterUser',  Signup);
 
-authRoute.post('/LoginUser',  Signin);
+authRoute.post('/LoginUser',   Signin);
 
 
 // Profile Router
 
 export const profileRoute = express.Router();
 
-profileRoute.delete('/DeleteProfile' ,deletePofile);
+profileRoute.delete('/DeleteProfile' ,VerifyCurrentToken ,deletePofile);
 
 profileRoute.put('/UpdateProfile' , updateProfile);
-
-
 
 //ScheduleRoute
 
