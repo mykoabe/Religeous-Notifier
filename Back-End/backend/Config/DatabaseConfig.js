@@ -1,25 +1,21 @@
 
 import mongoose from 'mongoose'
 
-const databaseUrl = "mongodb://localhost:12345/ampdatabase";
+// const databaseUrl = "mongodb://localhost:12345/ampdatabase";
 
-const databaseconfiguration = () =>{
 
-    mongoose.connect(databaseUrl, {
+const databaseconfiguration = async() =>{
+
+    const conn = await mongoose.connect(, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
         useFindAndModify: false,
       })
-    .then(()=>{
-        console.log("Database connected succesfully!");
-    })
-    .catch((error)=>{
-        console.log("Sorry! the Database connection Failed");
-    })
+      console.log(`Mongoose connected: ${conn.connection.host}`);
 
 }
 
-export default databaseconfiguration;
+module.exports = databaseconfiguration;
 
 
