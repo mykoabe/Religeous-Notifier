@@ -22,17 +22,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             fullName: incommingvalue['currentuser']['fullName'],
             userName: incommingvalue['currentuser']['userName'],
             userRole: incommingvalue['currentuser']['userRole']);
-
+        print("passed bloc");
         yield Logedin(user, incommingvalue['access_token']);
       } catch (e) {
         yield FaildLoging();
       }
     }
 
+
     if (event is LogoutEvent) {
       User logoutuser = User("", "",
           fullName: "", confirmPassword: "", userRole: "", userName: "");
       yield Logedin(logoutuser, "");
     }
+    
   }
 }

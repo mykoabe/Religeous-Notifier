@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-
+import mongoose from 'mongoose';
 const ScheduleFields = {
   createdby: {
     type: String,
@@ -19,7 +18,9 @@ const ScheduleFields = {
   },
 };
 
+
 const ScheduleSchema = mongoose.Schema(ScheduleFields);
 
 const ScheduleModel = mongoose.model("schedule", ScheduleSchema);
-module.exports = ScheduleModel;
+
+export default ScheduleModel

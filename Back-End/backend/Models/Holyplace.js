@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 
 const HolyplaceFields = {
 
@@ -28,8 +28,8 @@ const HolyplaceFields = {
 }
 
 
-const HolyPlaceSchema = mongoose.Schema(HolyplaceFields);
+const HolyPlaceSchema = Schema(HolyplaceFields);
 
-const HolyPlaceModel = mongoose.model('holyplaces' , HolyPlaceSchema);
+const HolyPlaceModel = model('holyplaces' , HolyPlaceSchema);
 
-module.exports = HolyPlaceModel;
+export default HolyPlaceModel;

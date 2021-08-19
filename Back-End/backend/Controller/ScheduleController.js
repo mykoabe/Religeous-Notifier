@@ -1,11 +1,11 @@
-const ScheduleModel = require('../Models/Schedule')
+import ScheduleModel from "../Models/Schedule.js";
 
-exports.createSchedule = async(httpreq, httpres) =>{
+export const createSchedule = async(httpreq, httpres) =>{
 
     try {
         const getPostedSchedule = httpreq.body;
 
-        await ScheduleModel.create(getPostedSchedule);
+        await ScheduleModel. create(getPostedSchedule);
 
         return httpres.status(201).json({"message": "Schedule Created"});
         
@@ -17,18 +17,18 @@ exports.createSchedule = async(httpreq, httpres) =>{
 
 }
 
-exports.deleteSchedule = async(httpreq, httpres) =>{
+export const deleteSchedule = async(httpreq, httpres)=>{
 
     try {
         const getparams = httpreq.query.id;
 
         const finalparam = getparams.slice(10, getparams.length-2);
 
-        const findSchedule = await ScheduleModel.findById({ "_id":finalparam});
+        const findSchedule = await ScheduleModel. findById({ "_id":finalparam});
 
         if(findSchedule){
 
-            await ScheduleModel.deleteOne({"_id":finalparam})
+            await ScheduleModel. deleteOne({"_id":finalparam})
             return httpres.json({"Message": "Succesfully Deleted"});
 
 
@@ -49,7 +49,7 @@ exports.deleteSchedule = async(httpreq, httpres) =>{
 }
 
  
-exports.updateSchedule = async(httpreq, httpres) =>{
+export const  updateSchedule = async (httpreq, httpres)=>{
 
     try {
         const getupdateddata= httpreq.body;
@@ -77,7 +77,7 @@ exports.updateSchedule = async(httpreq, httpres) =>{
 }
 
  
-exports.getallSchedules = async(httpreq, httpres) =>{
+export const getallSchedules = async (httpreq, httpres) =>{
 
     try {
 
@@ -100,6 +100,5 @@ exports.getallSchedules = async(httpreq, httpres) =>{
 
 
 }
-
 
 

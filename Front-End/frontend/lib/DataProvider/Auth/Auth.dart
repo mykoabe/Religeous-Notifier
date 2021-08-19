@@ -23,6 +23,7 @@ class ClientAuthDataProvider {
             fullName: incommingvalue['fullName'],
             confirmPassword: incommingvalue['confirmPassword']);
       }
+      print("passed dataprovider");
     } catch (e) {
       print(e);
     }

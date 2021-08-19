@@ -1,4 +1,4 @@
-const ScheduleModel = require("../models/Schedule");
+const ScheduleModel = require("../models/Schedule.js");
 
 exports.SubScribetoSchedule = async () => {};
 

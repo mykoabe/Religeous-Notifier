@@ -1,8 +1,7 @@
-const UserModel = require("../Models/User");
-
+import UserModel from "../Models/User.js";
 // Update User Account
 
-exports.updateProfile = async (httpreq, httpres) => {
+export const updateProfile = async (httpreq, httpres) =>{
   try {
     const getupdateinfo = httpreq.body;
 
@@ -11,17 +10,17 @@ exports.updateProfile = async (httpreq, httpres) => {
     });
     console.log(checkuser);
     if (checkuser) {
-      await UserModel.updateOne(checkuser, { $set: getupdateinfo });
+      await  UserModel.updateOne(checkuser, { $set: getupdateinfo });
       return httpres.status(201).send("Succesfully updated!");
     } else {
       return httpres.status(400).send("User doesnt exist");
     }
   } catch (error) {}
-};
+}
 
 // Delete User Account
 
-exports.deletePofile = async (httpreq, httpres) => {
+export const  deletePofile = async (httpreq, httpres)=> {
   try {
     const getuser = httpreq.body;
 
@@ -36,4 +35,4 @@ exports.deletePofile = async (httpreq, httpres) => {
       return httpres.status(400).send("User doesnt exist");
     }
   } catch (error) {}
-};
+}

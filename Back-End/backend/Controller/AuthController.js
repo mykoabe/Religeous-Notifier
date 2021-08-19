@@ -1,10 +1,11 @@
-const jwt = require("jsonwebtoken");
-const bcrypt = require('bcryptjs');
-const UserModel = require("../Models/User")
+import jwt from 'jsonwebtoken'
+import bcryptjs from 'bcryptjs'
+import UserModel from '../Models/User.js';
+
 
 
 // Signup Controller 
-exports.Signup = async (httprequest, httpresponse)=>{
+export  const Signup = async (httprequest, httpresponse)=>{
 
     try {
 
@@ -24,16 +25,16 @@ exports.Signup = async (httprequest, httpresponse)=>{
             httpresponse.status(400).send("All input is required");
         }
 
-        const check_user = await UserModel.findOne({ emailAddress });
+        const check_user = await  UserModel.findOne({ emailAddress });
       
         if (check_user) {
             return httpresponse.status(409).json("user already exist!");
             
         }
        
-        const  encryptedPassword = await bcrypt.hash(password, 10);
+        const  encryptedPassword = await bcryptjs.hash(password, 10);
        
-        const  encryptedConfirmPassword = await bcrypt.hash(confirmPassword, 10);
+        const  encryptedConfirmPassword = await bcryptjs.hash(confirmPassword, 10);
 
         const newUser = await UserModel.create({
 
@@ -69,7 +70,7 @@ exports.Signup = async (httprequest, httpresponse)=>{
 
 // Login Controller
 
-exports.Signin = async (httprequest, httpresponse)=>{
+export  const Signin = async (httprequest, httpresponse)=>{
 
         try{
             const {emailAddress , password} = httprequest.body;
@@ -82,11 +83,11 @@ exports.Signin = async (httprequest, httpresponse)=>{
         
 
             const currentUser = await UserModel.findOne({emailAddress});
-            const check_password = await bcrypt.compare(password , currentUser.password);
+            const check_password = await bcryptjs. compare(password , currentUser.password);
             
             if (currentUser && check_password){
 
-                const Generate_Token = jwt.sign(
+                const Generate_Token =jwt.sign(
                     {currentUser}, 
                     "my_key" , 
                     {

@@ -1,14 +1,15 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
-exports.VerifyCurrentToken = (req, res, next)=>{
+export function VerifyCurrentToken(req, res, next){
     let token = req.headers['authorization'].split(" ")[1];
 
     if(!(token)){
         console.log(token);
         next(new ErrorResponse("A token is required for authentication"))
     }
+    
     try {
-         jwt.verify(token, "my_key", (error, authdata) => {
+       jwt.verify(token, "my_key", (error, authdata) => {
              console.log(authdata);
          });
      
