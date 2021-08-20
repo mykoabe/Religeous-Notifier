@@ -8,11 +8,10 @@ import 'package:frontend/Models/HolyplaceModel.dart';
 class HolyPlace extends StatelessWidget {
   HolyPlace({Key? key}) : super(key: key);
 
-  var controller1 = TextEditingController();
-  var controller2 = TextEditingController();
-  var controller3 = TextEditingController();
-  var controller4 = TextEditingController();
-  var controller5 = TextEditingController();
+  var hollyPlaceController = TextEditingController();
+  var locationController = TextEditingController();
+  var historyController = TextEditingController();
+  var imageUrlController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,24 +38,24 @@ class HolyPlace extends StatelessWidget {
             ),
             Expanded(
                 child: CustomTextField(
-                    textEditingController: controller1,
+                    textEditingController: hollyPlaceController,
                     hinttext: "Enter name of holyplace",
                     icondata: Icon(Icons.place))),
             Expanded(
                 child: CustomTextField(
-              textEditingController: controller2,
+              textEditingController: locationController,
               hinttext: "Enter location ",
               icondata: Icon(Icons.location_city),
             )),
             Expanded(
                 child: CustomTextField(
-              textEditingController: controller3,
+              textEditingController: historyController,
               hinttext: "Enter  History",
               icondata: Icon(Icons.history),
             )),
             Expanded(
                 child: CustomTextField(
-              textEditingController: controller4,
+              textEditingController: imageUrlController,
               hinttext: "Enter Image URL",
               icondata: Icon(Icons.image),
             )),
@@ -65,10 +64,10 @@ class HolyPlace extends StatelessWidget {
               backroundcolor: Colors.blue,
               displaytext: Text("Add Schedule"),
               onPressedfun: () {
-                String nameofHolyplace = controller1.text.toString();
-                String location = controller2.text.toString();
-                String history = controller3.text.toString();
-                String imageurl = controller4.text.toString();
+                String nameofHolyplace = hollyPlaceController.text.toString();
+                String location = locationController.text.toString();
+                String history = historyController.text.toString();
+                String imageurl = imageUrlController.text.toString();
                 HolyplaceModel holyplaceModel = HolyplaceModel(
                   userid,
                   nameofHolyplace,
