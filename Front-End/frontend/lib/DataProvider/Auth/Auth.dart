@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:frontend/Models/User.dart';
 import 'package:frontend/Models/LoginModel.dart';
 
+import '../../Utilities/Constants.dart';
+
 //Genymotion emulator address 192.168.60.1
 
 class ClientAuthDataProvider {
@@ -13,7 +15,7 @@ class ClientAuthDataProvider {
     User getCurrentUser = User("", "");
     try {
       final httpresponse = await http.post(
-          Uri.parse('http://localhost:3500/api/RegisterUser'),
+          Uri.parse('$API_URL/RegisterUser'),
           body: user.tojson());
       if (httpresponse.statusCode == 201) {
         var incommingvalue = jsonDecode(httpresponse.body);
