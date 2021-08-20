@@ -15,8 +15,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    var loginstate = BlocProvider.of<LoginBloc>(context);
-    var schedulestate = BlocProvider.of<ScheduleBloc>(context);
+    var currentLoginState = BlocProvider.of<LoginBloc>(context);
     var holyplacesstate = BlocProvider.of<HolyPlaceBloc>(context);
 
     return Scaffold(
@@ -47,7 +46,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
             ListTile(
               leading: Icon(Icons.settings),
-              title: Text("Account Setting"),
+              title: Text("Account Settings"),
               onTap: () {
                 Navigator.pushNamed(context, '/accountsettings');
               },
@@ -80,7 +79,7 @@ class _MainScreenState extends State<MainScreen> {
                   onSelected: (value) {
                     switch (value) {
                       case 1:
-                        loginstate.add(LogoutEvent());
+                        currentLoginState.add(LogoutEvent());
                         Navigator.pushNamed(context, '/');
                         break;
                       case 2:
@@ -175,27 +174,6 @@ class _MainScreenState extends State<MainScreen> {
                                   return const Text('Sorry Image not found ');
                                 }),
                               ),
-                              Expanded(
-                                  child: GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(context, '/detailpage');
-                                },
-                                child: Text(
-                                  "more ...",
-                                  textAlign: TextAlign.right,
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                              )),
-                              Expanded(
-                                child: Container(
-                                  child: ElevatedButton(
-                                    child: Text("Subscribe"),
-                                    onPressed: () {},
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Colors.red,
-                                    ),
-                                  ),
-                                ),
                               )
                             ],
                           ),
