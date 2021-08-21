@@ -9,8 +9,8 @@ import 'package:frontend/ApplicationState/Bloc/Holyplace/blocs.dart';
 
 class Login extends StatelessWidget {
   Login({Key? key}) : super(key: key);
-  var controller1 = TextEditingController();
-  var controller2 = TextEditingController();
+  var emailCont = TextEditingController();
+  var passwordCont = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,21 +27,21 @@ class Login extends StatelessWidget {
         children: [
           CustomTextField(
             hinttext: "Email Address",
-            textEditingController: controller1,
+            textEditingController: emailCont,
             icondata: Icon(Icons.email),
           ),
           CustomTextField(
             hinttext: "Password",
-            textEditingController: controller2,
+            textEditingController: passwordCont,
             icondata: Icon(Icons.password),
           ),
           Hero(
-            tag: "logintag",
+            tag: "heroTag",
             child: CustomRoundButton(
               onPressedfun: () {
                 LoginModel loginModel = LoginModel(
-                    controller1.text.toLowerCase().toString(),
-                    controller2.text.toString());
+                    emailCont.text.toLowerCase().toString(),
+                    passwordCont.text.toString());
                 LoginEvent loginEvent = LogingUserEvent(loginModel);
                 BlocProvider.of<LoginBloc>(context).add(loginEvent);
               },
