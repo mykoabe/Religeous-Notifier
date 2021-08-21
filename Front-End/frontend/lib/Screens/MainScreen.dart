@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/ApplicationState/Bloc/Holyplace/blocs.dart';
 import 'package:frontend/ApplicationState/Bloc/Holyplace/holyplace_bloc.dart';
-import 'package:frontend/ApplicationState/Bloc/Login/blocs.dart';
-import 'package:frontend/ApplicationState/Bloc/Schedule/blocs.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
