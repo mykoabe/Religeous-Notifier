@@ -8,8 +8,8 @@ import 'package:frontend/ApplicationState/Bloc/Schedule/blocs.dart';
 
 class RepMainScreen extends StatelessWidget {
   RepMainScreen({Key? key}) : super(key: key);
-  var controller1 = TextEditingController();
-  var controller2 = TextEditingController();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
   var controller3 = TextEditingController();
   var controller4 = TextEditingController();
   var controller5 = TextEditingController();
