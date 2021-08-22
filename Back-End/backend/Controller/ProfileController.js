@@ -21,6 +21,9 @@ export const updateProfile = async (httpreq, httpres) =>{
 // Delete User Account
 
 export const  deletePofile = async (httpreq, httpres)=> {
+
+  
+
   try {
     const getuser = httpreq.body;
 
@@ -30,6 +33,7 @@ export const  deletePofile = async (httpreq, httpres)=> {
 
     if (checkuser) {
       await UserModel.deleteOne({ emailAddress: checkuser.emailAddress });
+      console.log("Deleted!")
       return httpres.status(200).send("Succesfully Deleted!");
     } else {
       return httpres.status(400).send("User doesnt exist");

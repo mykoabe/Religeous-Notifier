@@ -73,7 +73,6 @@ export const  updateSchedule = async (httpreq, httpres)=>{
         
     }
 
-
 }
 
  
@@ -82,15 +81,14 @@ export const getallSchedules = async (httpreq, httpres) =>{
     try {
 
         const schedules = await ScheduleModel.find();
-        if(schedules){
-            return httpres.status(200).send(`Schedules : ${schedules}`);
+        if(schedules != null){
+            return httpres.status(200).json({"Schedules": schedules});
 
         }else{
             return httpres.status(400).send("Sorry, didnt get any schedule!");
         }
-        // httpres.status(200).send("all Schedules");
         
-    
+        // return httpres.status(200).json({"message":"schedules"})
         
     } catch (error) {
 

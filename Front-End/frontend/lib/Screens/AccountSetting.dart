@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/Login_bloc.dart';
+import 'package:frontend/ApplicationState/Bloc/Login/Login_event.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/Login_state.dart';
+import 'package:frontend/Models/User.dart';
 
 class AccountSetting extends StatelessWidget {
   const AccountSetting({Key? key}) : super(key: key);
@@ -24,6 +26,7 @@ class AccountSetting extends StatelessWidget {
         child: BlocBuilder(
             bloc: loginstate,
             builder: (BuildContext context, LoginState state) {
+              print("rebuild");
               if (state is Logedin) {
                 return Column(
                   children: [
@@ -42,6 +45,34 @@ class AccountSetting extends StatelessWidget {
                     Container(
                       child: Text(
                           "password : ${state.loggedinUserinfo.tojson()['password']}"),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                        child: Text("Delete Account"),
+                        onPressed: () {
+                          print("Deleted event added!");
+                          User user =
+                              User(state.loggedinUserinfo.emailAddress, "");
+                          BlocProvider.of<LoginBloc>(context)
+                              .add(DeleteUserEvent(user, state.access_token));
+                          Navigator.pushNamed(context, '/');
+                        },
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                        child: Text("Update Account"),
+                        onPressed: () {
+                          print("update event added!");
+
+                          User user =
+                              User(state.loggedinUserinfo.emailAddress, "");
+                        },
+                      ),
                     ),
                   ],
                 );

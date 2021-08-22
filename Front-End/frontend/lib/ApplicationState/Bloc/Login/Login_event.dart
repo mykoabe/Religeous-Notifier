@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 // import 'package:frontend/Models/User.dart';
 import 'package:frontend/Models/LoginModel.dart';
+import 'package:frontend/Models/User.dart';
 
 class LoginEvent extends Equatable {
   @override
@@ -17,3 +18,11 @@ class LogingUserEvent extends LoginEvent {
 
 class LogoutEvent extends LoginEvent {}
 
+class DeleteUserEvent extends LoginEvent {
+  User user;
+  String accesstoken;
+  DeleteUserEvent(this.user, this.accesstoken);
+
+  @override
+  List<Object?> get props => [user, accesstoken];
+}

@@ -87,13 +87,14 @@ export  const Signin = async (httprequest, httpresponse)=>{
             
             if (currentUser && check_password){
 
-                const Generate_Token =jwt.sign(
+                const Generate_Token = jwt.sign(
                     {currentUser}, 
                     "my_key" , 
                     {
                         expiresIn:"2h"
                     }
                 );
+                console.log("Succesfully Logged In");
                 httpresponse.status(200).json({"access_token":Generate_Token , "currentuser":currentUser});
             }
             else{

@@ -14,18 +14,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 // import 'package:get/get_core/get_core.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:get/get.dart';
-
-// class LoginController extends StatelessWidget {
-//   const LoginController({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocProvider(
-//       create: (_) => LoginBloc(),
-//       child: Login(),
-//     );
-//   }
-// }
+import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_state.dart';
+import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_event.dart';
+import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_bloc.dart';
 
 class Login extends StatelessWidget {
   Login({Key? key}) : super(key: key);
@@ -82,6 +73,8 @@ class Login extends StatelessWidget {
                 if (role == "Representative") {
                   Navigator.pushNamed(context, '/repmainscreen');
                 } else if (role == "user") {
+                  BlocProvider.of<ScheduleBloc>(context)
+                      .add(LoadingScheduleEvent());
                   Navigator.pushNamed(context, '/mainscreen');
                 } else if (role == "Admin") {
                   Navigator.pushNamed(context, '/adminpage');

@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 // import 'package:frontend/Models/User.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:equatable/equatable.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/Login_bloc.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/Login_event.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/Login_state.dart';
+import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_bloc.dart';
+import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_state.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
-
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -18,6 +20,8 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     var loginstate = BlocProvider.of<LoginBloc>(context);
+    var schedulestate = BlocProvider.of<ScheduleBloc>(context);
+
     return Scaffold(
         drawer: Drawer(
             child: ListView(
@@ -57,6 +61,10 @@ class _MainScreenState extends State<MainScreen> {
           elevation: 0,
           backgroundColor: Colors.white12,
           iconTheme: IconThemeData(color: Colors.black87),
+          title: Text("Search",
+              style: TextStyle(
+                color: Colors.black,
+              )),
           actions: [
             GestureDetector(
               child: Icon(Icons.logout),
@@ -67,29 +75,51 @@ class _MainScreenState extends State<MainScreen> {
             )
           ],
         ),
-        body: Column(
-          children: [
-            BlocBuilder(
-                bloc: loginstate,
-                builder: (BuildContext context, LoginState state) {
-                  if (state is Logedin) {
-                    return Container(
-                      child: Center(
-                        child: Text(
-                          "Dear ${state.loggedinUserinfo.tojson()['userName'].toString()} , you have Succefully Logged In.",
+        body: Container(
+          child: BlocBuilder(
+            bloc: schedulestate,
+            builder: (BuildContext context, ScheduleState state) {
+              if (state is LoadingSchedules) {
+                return SpinKitDualRing(
+                  color: Colors.black,
+                  size: 50,
+                );
+              }
+
+              if (state is OnScheduleLoadSuccess) {
+                // return Text("${state.allschedules.toString()}");
+                return Container(
+                  margin: EdgeInsets.only(top: 10),
+                  child: ListView.builder(
+                    itemCount: state.allschedules.length,
+                    itemBuilder: (context, int index) {
+                      return Container(
+                        padding: EdgeInsets.all(10),
+                        margin: EdgeInsets.all(10),
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height / 2,
+                        child: Card(
+                          child: Column(
+                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                  "programs: ${state.allschedules[index]['programs']}"),
+                              SizedBox(
+                                height: 40,
+                              ),
+                              Text(
+                                  "createdby:  ${state.allschedules[index]['createdby']}"),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                  return Text("");
-                }),
-            Container(
-              child: ElevatedButton(
-                child: Text("get protected value"),
-                onPressed: () {},
-              ),
-            )
-          ],
+                      );
+                    },
+                  ),
+                );
+              }
+              return Text("noting found!");
+            },
+          ),
         ));
   }
 }

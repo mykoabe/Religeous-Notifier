@@ -53,16 +53,27 @@ class ClientAuthDataProvider {
     return finalvalue;
   }
 
-  static Future<String> deleteaccount(User user) async {
+  static Future<String> deleteaccount(User user, String accesstoken) async {
     var result = "";
 
     try {
-      //  final httpresponse = await http.delete(
-      //     Uri.parse('http://localhost:3500/api/DeleteProfile'),
-      //     body: user.tojson()
-      //     ,
-      //     headers: );
+      print("at DataProvider");
+      print(user.tojson());
+      print(accesstoken);
 
+      final httpresponse = await http.delete(
+        Uri.parse('http://localhost:3500/api/DeleteProfile'),
+        body: {
+          "emailAddress": user.tojson()['emailAddress'],
+        },
+        headers: {"Authorization": "${accesstoken}"},
+      );
+      print("sent delete request");
+      if (httpresponse.statusCode == 200) {
+        result = jsonDecode(httpresponse.body).toString();
+      } else if (httpresponse.statusCode == 400) {
+        result = jsonDecode(httpresponse.body).toString();
+      }
     } catch (e) {}
     return result;
   }

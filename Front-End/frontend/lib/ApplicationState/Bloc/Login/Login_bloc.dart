@@ -29,12 +29,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
     }
 
-
     if (event is LogoutEvent) {
       User logoutuser = User("", "",
           fullName: "", confirmPassword: "", userRole: "", userName: "");
       yield Logedin(logoutuser, "");
     }
-    
+
+    if (event is DeleteUserEvent) {
+      try {
+        print("at bloc");
+        String response =
+            await AuthRepository.DeleteUserRepo(event.user, event.accesstoken);
+        print(response);
+        // yield LoginState();
+      } catch (e) {}
+    }
   }
 }

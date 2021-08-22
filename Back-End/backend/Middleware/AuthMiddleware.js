@@ -1,23 +1,29 @@
 import jwt from "jsonwebtoken";
 
-export function VerifyCurrentToken(req, res, next){
-    let token = req.headers['authorization'].split(" ")[1];
+export const  VerifyCurrentToken = (req, res, next)=>{
+   console.log("Request has juss comming....")
+   const tokeninheader  = req.headers.authorization;
 
-    if(!(token)){
-        console.log(token);
-        next(new ErrorResponse("A token is required for authentication"))
-    }
+   if (typeof tokeninheader !== 'undefined'){
+       req.token = tokeninheader;
+
+       jwt.verify(req.token  , 'my_key' ,(err , authdata)=>{
+        if(err){
+          res.send(`${err}`);
     
-    try {
-       jwt.verify(token, "my_key", (error, authdata) => {
-             console.log(authdata);
-         });
-     
-      } catch (err) {
-        next(new ErrorResponse(`Invalid Token ${token}`));
-    }   
-    return next();
+        }
+        else {
+            console.log(authdata);
+       next();
 
+        }
+    
+      } );
+
+   }
+   else{
+       res.send("Can't get token!");    
+   }
 
 
 }
