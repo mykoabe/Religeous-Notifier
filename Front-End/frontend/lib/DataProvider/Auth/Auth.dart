@@ -7,7 +7,7 @@ import 'package:frontend/Models/LoginModel.dart';
 //Genymotion emulator address 192.168.60.1
 
 class ClientAuthDataProvider {
-  // Register User
+// RegisterUser DataProvider
 
   static Future<User> register(User user) async {
     User currentuser = User("", "");
@@ -25,13 +25,13 @@ class ClientAuthDataProvider {
       }
       print("passed dataprovider");
     } catch (e) {
-      print(e);
+      print(e.toString());
     }
 
     return currentuser;
   }
 
-// login User
+// Login DataProvider
 
   static Future<Map<String, dynamic>> login(LoginModel loginModel) async {
     var finalvalue;
@@ -47,11 +47,13 @@ class ClientAuthDataProvider {
         finalvalue = jsonDecode(httpresponse.body);
       }
     } catch (e) {
-      print(e);
+      print(e.toString());
     }
 
     return finalvalue;
   }
+
+// DeleteUser DataProvider
 
   static Future<String> deleteaccount(User user, String accesstoken) async {
     var result = "";
@@ -74,7 +76,9 @@ class ClientAuthDataProvider {
       } else if (httpresponse.statusCode == 400) {
         result = jsonDecode(httpresponse.body).toString();
       }
-    } catch (e) {}
+    } catch (e) {
+      print(e.toString());
+    }
     return result;
   }
 }

@@ -6,8 +6,6 @@ const ScheduleFields = {
     required: true,
   },
   dateofcreation: {
-    // type: Date,
-    // default: null,
     type: Date,
     default: Date.now,
   },

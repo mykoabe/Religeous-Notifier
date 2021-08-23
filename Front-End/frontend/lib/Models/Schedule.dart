@@ -1,6 +1,6 @@
 class Schedule {
   String? createdby;
-  List? allprograms;
+  List<String>? allprograms;
   Schedule(this.createdby, this.allprograms);
 
   factory Schedule.fromJson(Map<String, dynamic> json) {

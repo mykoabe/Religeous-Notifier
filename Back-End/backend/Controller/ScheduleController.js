@@ -3,11 +3,21 @@ import ScheduleModel from "../Models/Schedule.js";
 export const createSchedule = async(httpreq, httpres) =>{
 
     try {
+
         const getPostedSchedule = httpreq.body;
 
-        await ScheduleModel. create(getPostedSchedule);
 
-        return httpres.status(201).json({"message": "Schedule Created"});
+        const schedule =   await ScheduleModel.create({
+            createdby:getPostedSchedule.createdby,
+            programs:getPostedSchedule.programs
+        });
+        if(schedule){
+            return httpres.status(201).json({"message": "Schedule Created"});
+        }
+        else{
+        return httpres.status(400).json({"message": "Sorry Failed to Create Schedule."});
+
+        }
         
     } catch (error) {
 

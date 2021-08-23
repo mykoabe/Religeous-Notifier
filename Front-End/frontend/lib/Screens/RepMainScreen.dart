@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Models/User.dart';
-import 'package:frontend/Models/User.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/Login_bloc.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/Login_event.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/Login_state.dart';
+import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_bloc.dart';
+import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_event.dart';
+import 'package:frontend/Models/Schedule.dart';
+import 'package:frontend/Widgets/Button.dart';
+import 'package:frontend/Widgets/CustomTextField.dart';
 
 class RepMainScreen extends StatelessWidget {
   RepMainScreen({Key? key}) : super(key: key);
+  var controller1 = TextEditingController();
+  var controller2 = TextEditingController();
+  var controller3 = TextEditingController();
+  var controller4 = TextEditingController();
+  var controller5 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -69,18 +77,57 @@ class RepMainScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            BlocBuilder(
-                bloc: loginstate,
-                builder: (BuildContext context, LoginState state) {
-                  if (state is Logedin) {
-                    return Container(
-                      child: Center(
-                        child: Text("Representative Main Screen"),
-                      ),
-                    );
-                  }
-                  return Text("");
-                }),
+            Expanded(
+              child: Text("Schedule Form"),
+            ),
+            Expanded(
+                child: CustomTextField(
+              textEditingController: controller1,
+              hinttext: "Enter Your Name",
+              icondata: Icon(Icons.person),
+            )),
+            Expanded(
+                child: CustomTextField(
+              textEditingController: controller2,
+              hinttext: "Enter first Schedule",
+              icondata: Icon(Icons.schedule),
+            )),
+            Expanded(
+                child: CustomTextField(
+              textEditingController: controller3,
+              hinttext: "Enter second Schedule",
+              icondata: Icon(Icons.schedule),
+            )),
+            Expanded(
+                child: CustomTextField(
+              textEditingController: controller4,
+              hinttext: "Enter third Schedule",
+              icondata: Icon(Icons.schedule),
+            )),
+            Expanded(
+                child: CustomTextField(
+              textEditingController: controller5,
+              hinttext: "Enter fourth Schedule",
+              icondata: Icon(Icons.schedule),
+            )),
+            Expanded(
+                child: CustomRoundButton(
+              backroundcolor: Colors.blue,
+              displaytext: Text("Add Schedule"),
+              onPressedfun: () {
+                Schedule schedule = Schedule("", []);
+                schedule.createdby = controller1.text.toString();
+                schedule.allprograms = [
+                  controller2.text.toString(),
+                  controller3.text.toString(),
+                  controller4.text.toString(),
+                  controller5.text.toString(),
+                ];
+
+                BlocProvider.of<ScheduleBloc>(context)
+                    .add(AddingScheduleEvent(schedule));
+              },
+            )),
           ],
         ));
   }

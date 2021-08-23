@@ -18,3 +18,9 @@ class OnScheduleLoadSuccess extends ScheduleState {
 }
 
 class FaildLoadingSchedules extends ScheduleState {}
+
+class AddingSchedule extends ScheduleState {}
+
+class AddedSchedule extends ScheduleState {}
+
+class FailedtoAddSchedule extends ScheduleState {}

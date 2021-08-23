@@ -6,4 +6,9 @@ class SchedulesRepository {
     print("passed Schedule  repo");
     return await SchedulesDataProvovider.getAllSchedules();
   }
+
+  static Future<dynamic> createSchedule(Schedule schedule) async {
+    print("passed Schedule  repo");
+    return await SchedulesDataProvovider.createSchedule(schedule);
+  }
 }

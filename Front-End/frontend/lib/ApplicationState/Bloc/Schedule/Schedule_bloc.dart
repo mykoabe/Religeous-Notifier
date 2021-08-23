@@ -11,6 +11,8 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
 
   @override
   Stream<ScheduleState> mapEventToState(ScheduleEvent event) async* {
+    //LoadingScheduleEvent
+
     if (event is LoadingScheduleEvent) {
       yield LoadingSchedules();
       try {
@@ -18,10 +20,23 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
         print(incommingvalue);
 
         yield OnScheduleLoadSuccess(incommingvalue);
-
       } catch (e) {
         FaildLoadingSchedules();
         ;
+      }
+    }
+
+    //AddingScheduleEvent
+
+    if (event is AddingScheduleEvent) {
+      yield AddedSchedule();
+      try {
+        var responsemessage =
+            await SchedulesRepository.createSchedule(event.schedule);
+
+        print(responsemessage.toString());
+      } catch (e) {
+        yield FailedtoAddSchedule();
       }
     }
   }
