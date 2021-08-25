@@ -7,4 +7,3 @@ export 'RegisterScreen.dart';
 export 'AdminPage.dart';
 export 'LoginScreen.dart';
 export 'AddSchedule.dart';
-import 'AddHolyplace.dart';

@@ -174,6 +174,28 @@ class _MainScreenState extends State<MainScreen> {
                                   return const Text('Sorry Image not found ');
                                 }),
                               ),
+                              Expanded(
+                                  child: GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/detailpage');
+                                },
+                                child: Text(
+                                  "more ...",
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              )),
+                              Expanded(
+                                child: Container(
+                                  child: ElevatedButton(
+                                    child: Text("Subscribe"),
+                                    onPressed: () {},
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.red,
+                                    ),
+                                  ),
+                                ),
+
                               )
                             ],
                           ),

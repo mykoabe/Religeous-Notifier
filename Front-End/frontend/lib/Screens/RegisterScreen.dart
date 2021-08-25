@@ -24,10 +24,10 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  var controller1 = TextEditingController();
-  var controller2 = TextEditingController();
-  var controller3 = TextEditingController();
-  String dropdownValue = 'User';
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var confirmPassword = TextEditingController();
+  String roleDropDownValue = 'User';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,12 +40,12 @@ class _RegisterState extends State<Register> {
         children: [
           CustomTextField(
             hinttext: "Email Address",
-            textEditingController: controller1,
+            textEditingController: emailController,
             icondata: Icon(Icons.email),
           ),
           CustomTextField(
             hinttext: "Password",
-            textEditingController: controller2,
+            textEditingController: passwordController,
             icondata: Icon(Icons.password),
           ),
           CustomTextField(
@@ -63,13 +63,13 @@ class _RegisterState extends State<Register> {
                   ),
                 ),
                 DropdownButton<String>(
-                  value: dropdownValue,
+                  value: roleDropDownValue,
                   icon: const Icon(Icons.keyboard_arrow_down),
                   iconSize: 24,
                   style: const TextStyle(color: Colors.deepPurple),
                   onChanged: (String? newValue) {
                     setState(() {
-                      dropdownValue = newValue!;
+                      roleDropDownValue = newValue!;
                     });
                   },
                   items: <String>['User', 'Representative']
@@ -86,13 +86,13 @@ class _RegisterState extends State<Register> {
               child: CustomRoundButton(
                 onPressedfun: () async {
                   User newuser = User(
-                    controller1.text.toString(),
+                    emailController.text.toString(),
                     controller2.text.toString(),
                     userName: " Eharry ",
                     fullName: "Hailemariam Fikadie",
                     id: "tempoid",
-                    userRole: dropdownValue,
-                    confirmPassword: controller3.text.toString(),
+                    userRole: roleDropDownValue,
+                    confirmPassword: confirmPassword.text.toString(),
                   );
 
                   RegisterEvent registerEvent = RegisteringUser(newuser);
@@ -113,7 +113,7 @@ class _RegisterState extends State<Register> {
             }
             if (state is Registered) {
               return Text(
-                  "You have successfully Registered! go back and login");
+                  "Signup Sucess! go back and login");
             }
             if (state is FailedToRegister) {
               return Text("Failed!");
