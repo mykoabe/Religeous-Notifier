@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:frontend/ApplicationState/Bloc/Register/Register_State.dart';
-import 'package:frontend/ApplicationState/Bloc/Register/Register_bloc.dart';
-import 'package:frontend/Models/User.dart';
-// import 'package:frontend/Screens/HomePage.dart';
-// import 'package:frontend/Screens/MainScreen.dart';
-import 'package:frontend/Widgets/Button.dart';
-import 'package:frontend/Widgets/CustomTextField.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:frontend/ApplicationState/Bloc/Register/Register_State.dart';
-// import 'package:frontend/ApplicationState/Bloc/Register/Register_bloc.dart';
-import 'package:frontend/ApplicationState/Bloc/Register/Register_event.dart';
-// import 'package:get/get.dart';
+import 'package:frontend/ApplicationState/Bloc/Register/blocs.dart';
+import 'package:frontend/Widgets/widgets.dart';
+import 'package:frontend/Models/models.dart';
+
+
 
 class RegisterController extends StatelessWidget {
   const RegisterController({Key? key}) : super(key: key);

@@ -1,12 +1,9 @@
-// import 'dart:developer';
 
-// import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/ApplicationState/Bloc/Register/Register_event.dart';
 import 'package:frontend/Repository/MainRepository.dart';
-import 'Register_State.dart';
-// import 'Register_State.dart';
-import 'package:frontend/Models/User.dart';
+import 'blocs.dart';
+import 'package:frontend/Models/models.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc() : super(RegisterState());

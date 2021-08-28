@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/ApplicationState/Bloc/Login/Login_bloc.dart';
-import 'package:frontend/ApplicationState/Bloc/Login/Login_event.dart';
-import 'package:frontend/ApplicationState/Bloc/Login/Login_state.dart';
-import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_bloc.dart';
-import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_event.dart';
-import 'package:frontend/Models/Schedule.dart';
-import 'package:frontend/Widgets/Button.dart';
-import 'package:frontend/Widgets/CustomTextField.dart';
+import 'package:frontend/Widgets/widgets.dart';
+import 'package:frontend/ApplicationState/Bloc/Login/blocs.dart';
+import 'package:frontend/Models/models.dart';
+import 'package:frontend/ApplicationState/Bloc/Schedule/blocs.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 
 class RepMainScreen extends StatelessWidget {
   RepMainScreen({Key? key}) : super(key: key);
@@ -66,12 +63,69 @@ class RepMainScreen extends StatelessWidget {
                 color: Colors.black,
               )),
           actions: [
-            GestureDetector(
-              child: Icon(Icons.logout),
-              onTap: () {
-                loginstate.add(LogoutEvent());
-                Navigator.pushNamed(context, '/');
-              },
+            Container(
+              margin: EdgeInsets.only(right: 10),
+              child: PopupMenuButton(
+                  onSelected: (value) {
+                    switch (value) {
+                      case 1:
+                        loginstate.add(LogoutEvent());
+                        Navigator.pushNamed(context, '/');
+                        break;
+                      case 2:
+                        Navigator.pushNamed(context, "/accountsettings");
+                        break;
+                      case 3:
+                        Navigator.pushNamed(context, "/addholyplace");
+                        break;
+                      case 4:
+                        Navigator.pushNamed(context, "/addschudule");
+                        break;
+                    }
+                  },
+                  offset: Offset(5, 50),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  color: Color(0xff757575),
+                  elevation: 10,
+                  icon: Icon(
+                    Icons.circle,
+                    size: 40,
+                    color: Colors.blueGrey,
+                  ),
+                  itemBuilder: (context) {
+                    return [
+                      PopupMenuItem(
+                          value: 1,
+                          child: Text(
+                            "logout",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white),
+                          )),
+                      PopupMenuItem(
+                        value: 2,
+                        child: Text(
+                          "my Account",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      PopupMenuItem(
+                          value: 3,
+                          child: Text(
+                            "Add holypalce",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white),
+                          )),
+                      PopupMenuItem(
+                          value: 4,
+                          child: Text(
+                            "add schedule",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white),
+                          )),
+                    ];
+                  }),
             )
           ],
         ),

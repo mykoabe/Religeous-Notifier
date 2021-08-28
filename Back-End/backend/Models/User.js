@@ -1,12 +1,21 @@
 
 import mongoose from 'mongoose';
 
+const options = {
+  discriminatorKey: 'userrole', 
+  collection: 'users', 
+};
+
+
 const UserFields = {
+
+  
   fullName: {
     type: String,
     default: null,
     required: true,
   },
+
 
   userName: {
     type: String,
@@ -37,8 +46,8 @@ const UserFields = {
 };
 
 
-const UserSchema = new mongoose.Schema(UserFields);
-const UserModel = mongoose.model("user", UserSchema);
+const UserSchema = new mongoose.Schema(UserFields ,options ,{timestamps:true});
+const UserModel = mongoose.model("User", UserSchema);
 
  export default UserModel;
 

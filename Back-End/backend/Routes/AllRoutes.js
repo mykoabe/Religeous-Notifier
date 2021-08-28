@@ -1,6 +1,7 @@
-import { Signup, Signin } from "../Controller/AuthController.js";
+import { Signup, Signin , getallusers } from "../Controller/AuthController.js";
 import { deletePofile, updateProfile } from "../Controller/ProfileController.js";
 import { createSchedule, deleteSchedule, getallSchedules, updateSchedule } from "../Controller/ScheduleController.js";
+import {createHolyPlace} from "../Controller/HolyplaceController.js"
 
 import express from "express";
 
@@ -19,6 +20,7 @@ allroutes.post("/LoginUser", Signin);
 allroutes.delete("/DeleteProfile", VerifyCurrentToken, deletePofile);
 
 allroutes.put("/UpdateProfile", updateProfile);
+allroutes.get("/getAllUsers" ,getallusers )
 
 //ScheduleRoute
 
@@ -32,4 +34,9 @@ allroutes.put("/updateSchedule", updateSchedule);
 
 allroutes.get("/getallSchedules", getallSchedules);
 
+//HolyPlace 
+
+allroutes.post('/createHolyPlace' ,createHolyPlace )
+
 export default allroutes;
+

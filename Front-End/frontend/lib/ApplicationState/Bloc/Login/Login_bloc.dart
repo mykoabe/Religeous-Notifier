@@ -1,10 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/Repository/MainRepository.dart';
-import 'package:frontend/Models/User.dart';
-
-import 'Login_event.dart';
-import 'Login_state.dart';
-
+import 'blocs.dart';
+import 'package:frontend/Models/models.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState());
 

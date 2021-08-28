@@ -1,24 +1,29 @@
 import mongoose from 'mongoose';
+import  Schema   from 'mongoose';
+
+
 const ScheduleFields = {
+
   createdby: {
-    type: String,
-    default: null,
+    type: Schema.Types.ObjectId,
+    ref:'Representative',
     required: true,
   },
+  
   dateofcreation: {
     type: Date,
     default: Date.now,
   },
-  programs: {
-    type: [],
+  programs: [{
+    type: String,
     default: null,
     required: true,
-  },
+  }],
+
 };
 
 
-const ScheduleSchema = mongoose.Schema(ScheduleFields);
-
-const ScheduleModel = mongoose.model("schedule", ScheduleSchema);
+const ScheduleSchema = mongoose.Schema(ScheduleFields , {timestamps:true});
+const ScheduleModel = mongoose.model("Schedule", ScheduleSchema);
 
 export default ScheduleModel

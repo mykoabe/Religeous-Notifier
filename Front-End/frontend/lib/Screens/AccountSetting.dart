@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/ApplicationState/Bloc/Login/Login_bloc.dart';
-import 'package:frontend/ApplicationState/Bloc/Login/Login_event.dart';
-import 'package:frontend/ApplicationState/Bloc/Login/Login_state.dart';
-import 'package:frontend/Models/User.dart';
+import 'package:frontend/ApplicationState/Bloc/Login/blocs.dart';
+import 'package:frontend/Models/models.dart';
+
+
 
 class AccountSetting extends StatelessWidget {
   const AccountSetting({Key? key}) : super(key: key);

@@ -4,7 +4,6 @@ import {databaseconfiguration} from './Config/DatabaseConfig.js'
 import express from 'express'
 import bodyParser from 'body-parser'
 import jwt from 'jsonwebtoken';
-
 import allroutes from './Routes/AllRoutes.js'
 
 databaseconfiguration();

@@ -1,10 +1,12 @@
 import UserModel from "../Models/User.js";
 // Update User Account
 
+
+
 export const updateProfile = async (httpreq, httpres) =>{
   try {
-    const getupdateinfo = httpreq.body;
 
+    const getupdateinfo = httpreq.body;
     const checkuser = await UserModel.findOne({
       emailAddress: getupdateinfo.emailAddress,
     });

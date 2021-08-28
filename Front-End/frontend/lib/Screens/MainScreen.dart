@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:frontend/Models/User.dart';
-// import 'package:frontend/Models/User.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:equatable/equatable.dart';
+import 'package:frontend/ApplicationState/Bloc/Login/blocs.dart';
+import 'package:frontend/ApplicationState/Bloc/Schedule/blocs.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:frontend/ApplicationState/Bloc/Login/Login_bloc.dart';
-import 'package:frontend/ApplicationState/Bloc/Login/Login_event.dart';
-import 'package:frontend/ApplicationState/Bloc/Login/Login_state.dart';
-import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_bloc.dart';
-import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_state.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);

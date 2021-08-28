@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:frontend/Screens/AccountSetting.dart';
-// import 'package:frontend/Screens/AdminPage.dart';
-// import 'package:frontend/Screens/HomePage.dart';
-// import 'package:frontend/Screens/MainScreen.dart';
-// import 'package:frontend/Screens/RepMainScreen.dart';
-
-import 'package:frontend/ApplicationState/Bloc/Login/Login_bloc.dart';
-import 'package:frontend/ApplicationState/Bloc/Register/Register_bloc.dart';
-import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_bloc.dart';
-
-import 'package:frontend/generators/route_generator.dart';
-
+import 'ApplicationState/Bloc/Login/blocs.dart';
+import 'ApplicationState/Bloc/Register/blocs.dart';
+import 'ApplicationState/Bloc/Schedule/blocs.dart';
 import 'bloc_observer.dart';
+import 'Routes/Routes.dart';
 
 void main() {
+
   Bloc.observer = MyObserver();
   runApp(AppStarter());
+  
 }
 
 class AppStarter extends StatelessWidget {

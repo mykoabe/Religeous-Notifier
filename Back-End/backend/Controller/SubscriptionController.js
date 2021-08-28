@@ -1,5 +1,18 @@
-const ScheduleModel = require("../models/Schedule.js");
 
-exports.SubScribetoSchedule = async () => {};
 
-exports.UnSubScribetoSchedule = async () => {};
+export const Subscribe = async (httpreq, httpres) => {
+
+
+
+
+};
+
+
+export const unSubscribe = async (httpreq, httpres) => {
+
+    
+};
+
+
+
+  
