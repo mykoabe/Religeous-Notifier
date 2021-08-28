@@ -6,14 +6,42 @@ import 'package:frontend/Models/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/blocs.dart';
 
-class AddSchedule extends StatelessWidget {
+class AddSchedule extends StatefulWidget {
   AddSchedule({Key? key}) : super(key: key);
 
+  @override
+  _AddScheduleState createState() => _AddScheduleState();
+}
+
+class _AddScheduleState extends State<AddSchedule> {
   var controller1 = TextEditingController();
+
   var controller2 = TextEditingController();
+
   var controller3 = TextEditingController();
+
   var controller4 = TextEditingController();
+
   var controller5 = TextEditingController();
+
+   @override
+  void initState() {
+    final String text = controller1.text.toLowerCase();
+    controller1.value = controller1.value.copyWith(
+      text: text,
+      selection:
+          TextSelection(baseOffset: text.length, extentOffset: text.length),
+      composing: TextRange.empty,
+    );
+    super.initState();
+  }
+// remove all the resources the controller uses after the textField is removed from the widget tree
+   @override
+  void dispose() {
+    controller1.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
