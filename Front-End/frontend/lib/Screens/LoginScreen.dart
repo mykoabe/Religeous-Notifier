@@ -5,6 +5,7 @@ import 'package:frontend/ApplicationState/Bloc/Schedule/blocs.dart';
 import 'package:frontend/Widgets/widgets.dart';
 import 'package:frontend/Models/models.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:frontend/ApplicationState/Bloc/Holyplace/blocs.dart';
 
 class Login extends StatelessWidget {
   Login({Key? key}) : super(key: key);
@@ -60,9 +61,10 @@ class Login extends StatelessWidget {
 
                 if (role == "Representative") {
                   Navigator.pushNamed(context, '/repmainscreen');
-                } else if (role == "user") {
-                  BlocProvider.of<ScheduleBloc>(context)
-                      .add(LoadingScheduleEvent());
+                } else if (role == "User") {
+                  print('user navigator');
+                  BlocProvider.of<HolyPlaceBloc>(context)
+                      .add(LoadingHolyPlacesEvent());
                   Navigator.pushNamed(context, '/mainscreen');
                 } else if (role == "Admin") {
                   Navigator.pushNamed(context, '/adminpage');

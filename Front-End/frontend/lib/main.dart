@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'ApplicationState/Bloc/Login/blocs.dart';
 import 'ApplicationState/Bloc/Register/blocs.dart';
 import 'ApplicationState/Bloc/Schedule/blocs.dart';
+import 'ApplicationState/Bloc/Holyplace/blocs.dart';
 import 'bloc_observer.dart';
 import 'Routes/Routes.dart';
 
@@ -10,9 +11,8 @@ void main() {
 
   Bloc.observer = MyObserver();
   runApp(AppStarter());
-  
-}
 
+}
 class AppStarter extends StatelessWidget {
   const AppStarter({Key? key}) : super(key: key);
 
@@ -20,6 +20,9 @@ class AppStarter extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<HolyPlaceBloc>(
+          create: (BuildContext context) => HolyPlaceBloc(),
+        ),
         BlocProvider<ScheduleBloc>(
           create: (BuildContext context) => ScheduleBloc(),
         ),

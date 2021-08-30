@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/blocs.dart';
 import 'package:frontend/Models/models.dart';
 
-
-
 class AccountSetting extends StatelessWidget {
   const AccountSetting({Key? key}) : super(key: key);
 

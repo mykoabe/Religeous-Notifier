@@ -4,7 +4,6 @@ import UserModel from '../Models/User.js';
 import RepresentativeModel from '../Models/Representative.js';
 import AppUserModel from '../Models/AppUser.js';
 
-
 // Signup Controller 
 
 export  const Signup = async (httprequest, httpresponse)=>{
@@ -137,7 +136,6 @@ export const getallusers = async (httpreq, httpres) => {
         return httpres.status(400).send("Sorry, didnt get any user!");
       }
   
-      // return httpres.status(200).json({"message":"schedules"})
     } catch (error) {
       console.log(error);
     }

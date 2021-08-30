@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/Repository/MainRepository.dart';
 import 'blocs.dart';
 import 'package:frontend/Models/models.dart';
+
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState());
 
@@ -9,16 +10,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     if (event is LogingUserEvent) {
       yield Loging();
-
       try {
         Map<String, dynamic> incommingvalue =
             await AuthRepository.LoginUserRepo(event.loginModel);
 
-        User user = User(incommingvalue['currentuser']['emailAddress'],
-            incommingvalue['currentuser']['password'],
-            fullName: incommingvalue['currentuser']['fullName'],
-            userName: incommingvalue['currentuser']['userName'],
-            userRole: incommingvalue['currentuser']['userRole']);
+        User user = User(
+          incommingvalue['currentuser']['emailAddress'],
+          incommingvalue['currentuser']['password'],
+          fullName: incommingvalue['currentuser']['fullName'],
+          userName: incommingvalue['currentuser']['userName'],
+          userRole: incommingvalue['currentuser']['userRole'],
+          id: incommingvalue['currentuser']['_id'],
+        );
         print("passed bloc");
         yield Logedin(user, incommingvalue['access_token']);
       } catch (e) {

@@ -5,8 +5,6 @@ import 'package:frontend/ApplicationState/Bloc/Register/blocs.dart';
 import 'package:frontend/Widgets/widgets.dart';
 import 'package:frontend/Models/models.dart';
 
-
-
 class RegisterController extends StatelessWidget {
   const RegisterController({Key? key}) : super(key: key);
   @override
@@ -29,7 +27,7 @@ class _RegisterState extends State<Register> {
   var controller1 = TextEditingController();
   var controller2 = TextEditingController();
   var controller3 = TextEditingController();
-  String dropdownValue = 'user';
+  String dropdownValue = 'User';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +72,7 @@ class _RegisterState extends State<Register> {
                       dropdownValue = newValue!;
                     });
                   },
-                  items: <String>['user', 'Representative']
+                  items: <String>['User', 'Representative']
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -92,6 +90,7 @@ class _RegisterState extends State<Register> {
                     controller2.text.toString(),
                     userName: " Eharry ",
                     fullName: "Hailemariam Fikadie",
+                    id: "tempoid",
                     userRole: dropdownValue,
                     confirmPassword: controller3.text.toString(),
                   );

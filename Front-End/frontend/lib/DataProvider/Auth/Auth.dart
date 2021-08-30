@@ -18,11 +18,14 @@ class ClientAuthDataProvider {
       if (httpresponse.statusCode == 201) {
         var incommingvalue = jsonDecode(httpresponse.body);
         currentuser = User(
-            incommingvalue['emailAddress'], incommingvalue['password'],
-            userName: incommingvalue['userName'],
-            fullName: incommingvalue['fullName'],
-            confirmPassword: incommingvalue['confirmPassword']);
+          incommingvalue['emailAddress'],
+          incommingvalue['password'],
+          userName: incommingvalue['userName'],
+          fullName: incommingvalue['fullName'],
+          confirmPassword: incommingvalue['confirmPassword'],
+        );
       }
+
       print("passed dataprovider");
     } catch (e) {
       print(e.toString());

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/ApplicationState/Bloc/Holyplace/blocs.dart';
+import 'package:frontend/ApplicationState/Bloc/Holyplace/holyplace_bloc.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/blocs.dart';
 import 'package:frontend/ApplicationState/Bloc/Schedule/blocs.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -15,6 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     var loginstate = BlocProvider.of<LoginBloc>(context);
     var schedulestate = BlocProvider.of<ScheduleBloc>(context);
+    var holyplacesstate = BlocProvider.of<HolyPlaceBloc>(context);
 
     return Scaffold(
         drawer: Drawer(
@@ -71,8 +74,8 @@ class _MainScreenState extends State<MainScreen> {
         ),
         body: Container(
           child: BlocBuilder(
-            bloc: schedulestate,
-            builder: (BuildContext context, ScheduleState state) {
+            bloc: holyplacesstate,
+            builder: (BuildContext context, HolyPlaceState state) {
               if (state is LoadingSchedules) {
                 return SpinKitDualRing(
                   color: Colors.black,
@@ -80,12 +83,12 @@ class _MainScreenState extends State<MainScreen> {
                 );
               }
 
-              if (state is OnScheduleLoadSuccess) {
+              if (state is OnHolyPlaceLoadSuccess) {
                 // return Text("${state.allschedules.toString()}");
                 return Container(
                   margin: EdgeInsets.only(top: 10),
                   child: ListView.builder(
-                    itemCount: state.allschedules.length,
+                    itemCount: state.allholyplaces.length,
                     itemBuilder: (context, int index) {
                       return Container(
                         padding: EdgeInsets.all(10),
@@ -94,15 +97,43 @@ class _MainScreenState extends State<MainScreen> {
                         height: MediaQuery.of(context).size.height / 2,
                         child: Card(
                           child: Column(
-                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Text(
-                                  "programs: ${state.allschedules[index]['programs']}"),
-                              SizedBox(
-                                height: 40,
+                              Expanded(
+                                child: Text(
+                                  "${state.allholyplaces[index]['name'].toString()}",
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
-                              Text(
-                                  "createdby:  ${state.allschedules[index]['createdby']}"),
+                              Expanded(
+                                child: Image.network(
+                                    (state.allholyplaces[index]['image'] !=
+                                            null)
+                                        ? state.allholyplaces[index]['image']
+                                        : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROGVlwDhbC-6RixbdgEwDrABJ6BD3hhM2eJA&usqp=CAU",
+                                    errorBuilder: (context, Object exception,
+                                        StackTrace? stackTrace) {
+                                  return const Text('Sorry Image not found ');
+                                }),
+                              ),
+                              Expanded(
+                                  child: Text(
+                                "more ...",
+                                textAlign: TextAlign.right,
+                                style: TextStyle(color: Colors.red),
+                              )),
+                              Expanded(
+                                child: Container(
+                                  child: ElevatedButton(
+                                    child: Text("Subscribe"),
+                                    onPressed: () {},
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.red,
+                                    ),
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         ),
@@ -113,6 +144,7 @@ class _MainScreenState extends State<MainScreen> {
               }
               return Text("noting found!");
             },
+            
           ),
         ));
   }
