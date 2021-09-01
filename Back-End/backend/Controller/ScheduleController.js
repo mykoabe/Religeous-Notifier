@@ -2,9 +2,8 @@ import ScheduleModel from "../Models/Schedule.js";
 import UserModel from "../Models/User.js";
 import RepresentativeModel  from "../Models/Representative.js";
 
-
 export const createSchedule = async (httpreq, httpres) => {
-
+  
   try {
     const getPostedSchedule = httpreq.body;
     const schedule = new ScheduleModel(getPostedSchedule);
@@ -83,3 +82,4 @@ export const getallSchedules = async (httpreq, httpres) => {
     console.log(error);
   }
 };
+

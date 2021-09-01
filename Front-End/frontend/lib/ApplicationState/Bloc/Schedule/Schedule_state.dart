@@ -21,6 +21,12 @@ class FaildLoadingSchedules extends ScheduleState {}
 
 class AddingSchedule extends ScheduleState {}
 
-class AddedSchedule extends ScheduleState {}
+class onAddingScheduleSucess extends ScheduleState {
+  String responsemessage;
+  onAddingScheduleSucess(this.responsemessage);
+
+  @override
+  List<Object?> get props => [responsemessage];
+}
 
 class FailedtoAddSchedule extends ScheduleState {}

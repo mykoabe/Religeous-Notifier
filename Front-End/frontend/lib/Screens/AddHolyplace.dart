@@ -17,6 +17,15 @@ class HolyPlace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String userid = "";
+    String responseMessage = "";
+
+    HolyPlaceState responsestate =
+        BlocProvider.of<HolyPlaceBloc>(context).state;
+
+    if (responsestate is onCreateHolyPlaceSucess) {
+      responseMessage = responsestate.responsemessage.toString();
+    }
+
     LoginState userstate = BlocProvider.of<LoginBloc>(context).state;
     if (userstate is Logedin) {
       userid = userstate.loggedinUserinfo.id.toString();
@@ -70,6 +79,12 @@ class HolyPlace extends StatelessWidget {
 
                 BlocProvider.of<HolyPlaceBloc>(context)
                     .add(createHolyplaceEvent(holyplaceModel));
+
+                Navigator.pop(context);
+
+                final mysnackbar = SnackBar(content: Text("$responseMessage"));
+                ScaffoldMessenger.of(context).showSnackBar(mysnackbar);
+                
               },
             ))
           ],

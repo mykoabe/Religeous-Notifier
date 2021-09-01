@@ -7,7 +7,6 @@ import 'package:frontend/Models/Schedule.dart';
 class SchedulesDataProvovider {
   static Future<dynamic> getAllSchedules() async {
     dynamic schedules;
-
     try {
       final httpresponse = await http.get(
         Uri.parse('http://localhost:3500/api/getallSchedules'),
@@ -28,13 +27,12 @@ class SchedulesDataProvovider {
 
     try {
       print(schedule.tojson());
-      final response = await http.post(
-          Uri.parse('http://localhost:3500/api/createSchedule'),
-          body: {
-            'createdby':schedule.createdby.toString(),
-            'programs':schedule.allprograms.toString(),
-          });
-      // responsemessage = jsonDecode(response.body).toString();
+      final response = await http
+          .post(Uri.parse('http://localhost:3500/api/createSchedule'), body: {
+        'createdby': schedule.createdby.toString(),
+        'programs': schedule.allprograms.toString(),
+      });
+      responsemessage = jsonDecode(response.body).toString();
     } catch (e) {
       print(e.toString());
     }

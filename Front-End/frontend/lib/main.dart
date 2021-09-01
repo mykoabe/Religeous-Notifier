@@ -8,11 +8,10 @@ import 'bloc_observer.dart';
 import 'Routes/Routes.dart';
 
 void main() {
-
   Bloc.observer = MyObserver();
   runApp(AppStarter());
-
 }
+
 class AppStarter extends StatelessWidget {
   const AppStarter({Key? key}) : super(key: key);
 
