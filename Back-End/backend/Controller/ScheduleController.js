@@ -16,7 +16,6 @@ export const createSchedule = async (httpreq, httpres) => {
     creator.postedSchedules.push(schedule);
     await creator.save();
 
-
     if (schedule) {
       return httpres.status(201).json({ message: "Schedule Created" });
     } else {

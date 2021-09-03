@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Screens/AddHolyplace.dart';
+import 'package:frontend/Screens/AllSubscription.dart';
+import 'package:frontend/Screens/DetailPage.dart';
 import 'package:frontend/Screens/screens.dart';
 
 class RouteGenerator {
@@ -19,6 +21,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => AdminPage());
       case '/accountsettings':
         return MaterialPageRoute(builder: (context) => AccountSetting());
+      case '/allscubscription':
+        return MaterialPageRoute(builder: (context) => AllSubscription());
+      case '/detailpage':
+        return MaterialPageRoute(builder: (context) => DetailPage());
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();

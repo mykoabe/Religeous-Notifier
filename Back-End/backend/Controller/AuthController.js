@@ -135,7 +135,6 @@ export const getallusers = async (httpreq, httpres) => {
       } else {
         return httpres.status(400).send("Sorry, didnt get any user!");
       }
-  
     } catch (error) {
       console.log(error);
     }

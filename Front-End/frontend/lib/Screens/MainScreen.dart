@@ -63,12 +63,70 @@ class _MainScreenState extends State<MainScreen> {
                 color: Colors.black,
               )),
           actions: [
-            GestureDetector(
-              child: Icon(Icons.logout),
-              onTap: () {
-                loginstate.add(LogoutEvent());
-                Navigator.pushNamed(context, '/');
-              },
+            Container(
+              child: GestureDetector(
+                child: Icon(
+                  Icons.notification_add,
+                  color: Colors.red,
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/allscubscription');
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(right: 10),
+              child: PopupMenuButton(
+                  onSelected: (value) {
+                    switch (value) {
+                      case 1:
+                        loginstate.add(LogoutEvent());
+                        Navigator.pushNamed(context, '/');
+                        break;
+                      case 2:
+                        Navigator.pushNamed(context, "/accountsettings");
+                        break;
+                      case 3:
+                        Navigator.pushNamed(context, "/allscubscription");
+                        break;
+                    }
+                  },
+                  offset: Offset(5, 50),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  color: Color(0xff757575),
+                  elevation: 10,
+                  icon: Icon(
+                    Icons.circle,
+                    size: 40,
+                    color: Colors.blueGrey,
+                  ),
+                  itemBuilder: (context) {
+                    return [
+                      PopupMenuItem(
+                          value: 1,
+                          child: Text(
+                            "logout",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white),
+                          )),
+                      PopupMenuItem(
+                        value: 2,
+                        child: Text(
+                          "my Account",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      PopupMenuItem(
+                          value: 3,
+                          child: Text(
+                            "All Subscription ",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white),
+                          ))
+                    ];
+                  }),
             )
           ],
         ),
@@ -118,10 +176,15 @@ class _MainScreenState extends State<MainScreen> {
                                 }),
                               ),
                               Expanded(
-                                  child: Text(
-                                "more ...",
-                                textAlign: TextAlign.right,
-                                style: TextStyle(color: Colors.red),
+                                  child: GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/detailpage');
+                                },
+                                child: Text(
+                                  "more ...",
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(color: Colors.red),
+                                ),
                               )),
                               Expanded(
                                 child: Container(
@@ -144,7 +207,6 @@ class _MainScreenState extends State<MainScreen> {
               }
               return Text("noting found!");
             },
-            
           ),
         ));
   }

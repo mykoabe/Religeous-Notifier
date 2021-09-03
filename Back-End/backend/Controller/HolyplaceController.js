@@ -68,6 +68,7 @@ export const createHolyPlace = async (httpreq, httpres) => {
             _id: holyplace.createdby,
 
           });
+
           holyplace.createdby = creator;
 
           if(index == lastholyplace){
