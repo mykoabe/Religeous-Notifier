@@ -57,41 +57,45 @@ class AllSubscription extends StatelessWidget {
                                           null)
                                       ? state.allSubscriptions[index]['image']
                                       : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROGVlwDhbC-6RixbdgEwDrABJ6BD3hhM2eJA&usqp=CAU",
-                                  fit: BoxFit.cover, errorBuilder: (context,
+                                  height: 150,fit: BoxFit.contain, errorBuilder: (context,
                                       Object exception,
                                       StackTrace? stackTrace) {
                                 return const Text('Sorry Image not found ');
                               }),
-                              Container(
-                                margin: EdgeInsets.symmetric(horizontal: 10),
-                                decoration: BoxDecoration(color: Colors.grey),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    simpleText(
-                                        label: "Location: ", fontSize: 20),
-                                    simpleText(
-                                        label: state.allSubscriptions[index]
-                                            ['location'],
-                                        fontSize: 20),
-                                  ],
+                              Expanded(
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 10),
+                                  decoration: BoxDecoration(color: Colors.grey),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      simpleText(
+                                          label: "Location: ", fontSize: 20),
+                                      simpleText(
+                                          label: state.allSubscriptions[index]
+                                              ['location'],
+                                          fontSize: 20),
+                                    ],
+                                  ),
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.symmetric(horizontal: 10),
-                                decoration: BoxDecoration(color: Colors.grey),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    simpleText(
-                                        label: "History: ", fontSize: 20),
-                                    simpleText(
-                                        label: state.allSubscriptions[index]
-                                            ['history'],
-                                        fontSize: 20),
-                                  ],
+                              Expanded(
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 10),
+                                  decoration: BoxDecoration(color: Colors.grey),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      simpleText(
+                                          label: "History: ", fontSize: 20),
+                                      simpleText(
+                                          label: state.allSubscriptions[index]
+                                              ['history'],
+                                          fontSize: 20),
+                                    ],
+                                  ),
                                 ),
                               ),
                               ElevatedButton(

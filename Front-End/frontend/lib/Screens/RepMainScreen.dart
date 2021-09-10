@@ -16,7 +16,11 @@ class RepMainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var loginstate = BlocProvider.of<LoginBloc>(context);
+    String userId = "";
+    var loginstate = BlocProvider.of<LoginBloc>(context).state;
+    if (loginstate is Logedin) {
+      userId = loginstate.loggedinUserinfo.id!;
+    }
     return Scaffold(
       drawer: Drawer(
           child: ListView(
@@ -67,7 +71,7 @@ class RepMainScreen extends StatelessWidget {
                 onSelected: (value) {
                   switch (value) {
                     case 1:
-                      loginstate.add(LogoutEvent());
+                      BlocProvider.of<LoginBloc>(context).add(LogoutEvent());
                       Navigator.pushNamed(context, '/');
                       break;
                     case 2:
@@ -78,6 +82,12 @@ class RepMainScreen extends StatelessWidget {
                       break;
                     case 4:
                       Navigator.pushNamed(context, "/addschudule");
+                      break;
+                    case 5:
+                      BlocProvider.of<ScheduleBloc>(context).add(
+                        GetRepSchedules(userId),
+                      );
+                      Navigator.pushNamed(context, "/allprograms");
                       break;
                   }
                 },
@@ -122,13 +132,35 @@ class RepMainScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white),
                         )),
+                    PopupMenuItem(
+                        value: 5,
+                        child: Text(
+                          "posted Schedules",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white),
+                        )),
                   ];
                 }),
           )
         ],
       ),
       body: Stack(
-        children: [Text("Representive screen.")],
+        children: [
+          Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Image.asset('assets/images/background.jpg',
+                  fit: BoxFit.cover)),
+          Center(
+            child: Text(
+              "Representive screen.",
+              style: TextStyle(
+                fontFamily: 'Pacifico',
+                fontSize: 23,
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

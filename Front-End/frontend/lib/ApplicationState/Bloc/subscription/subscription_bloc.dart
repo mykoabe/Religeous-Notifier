@@ -24,7 +24,7 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
       if (message.runtimeType != String) {
         yield Subscribed(message: message['message']);
       } else
-        yield SubscribeUnsbscribeFaild(message: message);
+        yield SubscribeUnsbscribeFaild(message: "Failed");
     }
     if (event is UnSubscribe) {
       yield SubscriptionInProgress();

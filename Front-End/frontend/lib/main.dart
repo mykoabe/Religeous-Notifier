@@ -6,11 +6,11 @@ import 'ApplicationState/Bloc/Login/blocs.dart';
 import 'ApplicationState/Bloc/Register/blocs.dart';
 import 'ApplicationState/Bloc/Schedule/blocs.dart';
 import 'ApplicationState/Bloc/Holyplace/blocs.dart';
-// import 'bloc_observer.dart';
+import 'bloc_observer.dart';
 import 'Routes/Routes.dart';
 
 void main() {
-  // Bloc.observer = MyObserver();
+  Bloc.observer = MyObserver();
   runApp(AppStarter());
 }
 

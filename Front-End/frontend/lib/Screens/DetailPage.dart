@@ -3,8 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:frontend/ApplicationState/Bloc/Holyplace/holyplace_bloc.dart';
 import 'package:frontend/ApplicationState/Bloc/Holyplace/holyplace_event.dart';
+import 'package:frontend/ApplicationState/Bloc/Login/Login_state.dart';
+import 'package:frontend/ApplicationState/Bloc/Login/blocs.dart';
+import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_bloc.dart';
+import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_event.dart';
 import 'package:frontend/ApplicationState/Bloc/subscription/subscription_bloc.dart';
 import 'package:frontend/Models/SubscriptionModel.dart';
+import 'package:frontend/Screens/AllPrograms.dart';
+import 'package:frontend/Screens/screens.dart';
 
 class DetailPage extends StatelessWidget {
   DetailPage(
@@ -20,8 +26,23 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // final args =
     //     ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    String id = "";
+    var state = BlocProvider.of<LoginBloc>(context).state;
+    if (state is Logedin) {
+      id = state.loggedinUserinfo.id!;
+    }
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              BlocProvider.of<ScheduleBloc>(context).add(
+                GetNotSeenNumber(id),
+              );
+              Navigator.pop(context);
+            },
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(2.0),
           child: SafeArea(
@@ -29,7 +50,7 @@ class DetailPage extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 1.5,
+                height: MediaQuery.of(context).size.height / 1.2,
                 child: Card(
                   elevation: 10,
                   child: Column(
@@ -50,6 +71,7 @@ class DetailPage extends StatelessWidget {
                         ],
                       ),
                       Expanded(
+                        flex: 2,
                         child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           decoration: BoxDecoration(
@@ -73,36 +95,69 @@ class DetailPage extends StatelessWidget {
                         ],
                       ),
                       subscribed
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                  buttonWidget(
-                                    function: () {},
-                                    color: Colors.blueAccent,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Icon(Icons.check),
-                                        Text("subscribed"),
-                                      ],
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    buttonWidget(
+                                      function: () {},
+                                      color: Colors.blueAccent,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Icon(Icons.check),
+                                          Text("subscribed"),
+                                        ],
+                                      ),
                                     ),
+                                    buttonWidget(
+                                      function: () {
+                                        BlocProvider.of<SubscriptionBloc>(
+                                                context)
+                                            .add(
+                                          UnSubscribe(
+                                            subscriptionModel:
+                                                SubscriptionModel(
+                                                    hollyplace['createdby']
+                                                        ['_id'],
+                                                    userId),
+                                          ),
+                                        );
+                                      },
+                                      color: Colors.redAccent,
+                                      child: Text('unSubscribe'),
+                                    ),
+                                  ],
+                                ),
+                                ElevatedButton(
+                                  child: Text(
+                                    "see schedules",
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.green),
                                   ),
-                                  buttonWidget(
-                                    function: () {
-                                      BlocProvider.of<SubscriptionBloc>(context)
-                                          .add(
-                                        UnSubscribe(
-                                          subscriptionModel: SubscriptionModel(
-                                              hollyplace['createdby']['_id'],
-                                              userId),
-                                        ),
-                                      );
-                                    },
-                                    color: Colors.redAccent,
-                                    child: Text('unSubscribe'),
-                                  ),
-                                ])
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Colors.white),
+                                  onPressed: () {
+                                    BlocProvider.of<ScheduleBloc>(context).add(
+                                      LoadAllSchedules(
+                                        hollyplace['createdby']['_id'],
+                                      ),
+                                    );
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AllPrograms(
+                                            hollyplaceName: hollyplace['name']),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            )
                           : buttonWidget(
                               function: () {
                                 print("Button is pressed");
@@ -123,11 +178,14 @@ class DetailPage extends StatelessWidget {
                           if (state is UnSubscribed || state is Subscribed) {
                             BlocProvider.of<HolyPlaceBloc>(context)
                                 .add(LoadingHolyPlacesEvent());
+                            BlocProvider.of<ScheduleBloc>(context)
+                                .add(GetNotSeenNumber(id));
+
                             Navigator.pop(context);
                           }
                         },
                         builder: (context, state) {
-                          if(state is SubscriptionInProgress){
+                          if (state is SubscriptionInProgress) {
                             return SpinKitDualRing(
                               color: Colors.black,
                               size: 50,

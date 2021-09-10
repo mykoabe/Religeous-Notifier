@@ -4,7 +4,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/ApplicationState/Bloc/Holyplace/blocs.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/blocs.dart';
-import 'package:frontend/ApplicationState/Bloc/Register/blocs.dart';
+import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_bloc.dart';
+import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_event.dart';
 import 'package:frontend/Widgets/widgets.dart';
 import 'package:frontend/Models/models.dart';
 
@@ -101,6 +102,9 @@ class Login extends StatelessWidget {
                             if (role == "Representative") {
                               Navigator.pushNamed(context, '/repmainscreen');
                             } else if (role == "User") {
+                              BlocProvider.of<ScheduleBloc>(context).add(
+                                GetNotSeenNumber(state.loggedinUserinfo.id!),
+                              );
                               BlocProvider.of<HolyPlaceBloc>(context)
                                   .add(LoadingHolyPlacesEvent());
                               Navigator.pushNamed(context, '/mainscreen');
@@ -117,7 +121,10 @@ class Login extends StatelessWidget {
                             );
                           }
                           if (state is FaildLoging) {
-                            return Text("Email or password incorrect!",style: TextStyle(fontSize: 25,color: Colors.red),);
+                            return Text(
+                              "Email or password incorrect!",
+                              style: TextStyle(fontSize: 25, color: Colors.red),
+                            );
                           }
                           return Hero(
                             tag: "loginTag",

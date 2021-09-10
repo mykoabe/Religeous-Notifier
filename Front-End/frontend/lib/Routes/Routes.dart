@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Models/Schedule.dart';
 import 'package:frontend/Models/User.dart';
-import 'package:frontend/Screens/AddHolyplace.dart';
-import 'package:frontend/Screens/AllSubscription.dart';
 import 'package:frontend/Screens/screens.dart';
 
 class RouteGenerator {
@@ -12,7 +11,9 @@ class RouteGenerator {
       case '/mainscreen':
         return MaterialPageRoute(builder: (context) => MainScreen());
       case '/addschudule':
-        return MaterialPageRoute(builder: (context) => AddSchedule());
+        return MaterialPageRoute(builder: (context) => AddOrUpdateSchedule(scheduleArgument: ScheduleArgument(),));
+      case '/allprograms':
+        return MaterialPageRoute(builder: (context) => AllPrograms());
       case '/addholyplace':
         return MaterialPageRoute(builder: (context) => HolyPlace());
       case '/repmainscreen':

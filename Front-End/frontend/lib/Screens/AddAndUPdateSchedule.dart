@@ -7,16 +7,31 @@ import 'package:frontend/Models/Schedule.dart';
 import 'package:frontend/Widgets/Button.dart';
 import 'package:frontend/Widgets/CustomTextField.dart';
 
-class AddSchedule extends StatelessWidget {
-  AddSchedule({Key? key}) : super(key: key);
+class AddOrUpdateSchedule extends StatelessWidget {
+  AddOrUpdateSchedule({Key? key, required this.scheduleArgument})
+      : super(key: key);
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final programOneController = TextEditingController();
   final programTwoController = TextEditingController();
   final ProgramThreeController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final ScheduleArgument scheduleArgument;
+
   @override
   Widget build(BuildContext context) {
+    Schedule sch;
+    bool isUpdate = scheduleArgument.update;
+    if (isUpdate) {
+      sch = scheduleArgument.schedule!;
+      var allPrograms = sch.allprograms!.split(',');
+      titleController.text = sch.title!;
+      descriptionController.text = sch.description!;
+      programOneController.text = allPrograms[0];
+      programTwoController.text = allPrograms[1];
+      ProgramThreeController.text = allPrograms[2];
+    } else
+      sch = Schedule('', '');
     String userId = '';
     LoginState userState = BlocProvider.of<LoginBloc>(context).state;
     if (userState is Logedin) {
@@ -25,7 +40,7 @@ class AddSchedule extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Add Schedule",
+          isUpdate ? "UPdate Schedule" : "Add Schedule",
           style: TextStyle(
             fontSize: 20,
             fontFamily: 'Montserrat',
@@ -45,7 +60,7 @@ class AddSchedule extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  "Add Schedule",
+                  isUpdate ? "Update Schedule" : "Add Schedule",
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.pinkAccent,
@@ -67,7 +82,7 @@ class AddSchedule extends StatelessWidget {
                         icondata: Icon(Icons.title),
                         isValid: (value) {
                           if (value!.isEmpty) {
-                            return "provide consie title";
+                            return "provide conscise title";
                           }
                           return null;
                         },
@@ -117,8 +132,10 @@ class AddSchedule extends StatelessWidget {
                         },
                       ),
                       CustomRoundButton(
-                          backroundcolor: Colors.blue,
-                          displaytext: Text("Add Schdule"),
+                          backroundcolor:
+                              isUpdate ? Colors.yellowAccent : Colors.blue,
+                          displaytext: Text(
+                              isUpdate ? "Update Schedule" : "Add Schdule"),
                           onPressedfun: () {
                             var form = _formKey.currentState;
                             if (form!.validate()) {
@@ -128,11 +145,15 @@ class AddSchedule extends StatelessWidget {
                                     programOneController.text,
                                     programTwoController.text,
                                     ProgramThreeController.text
-                                  ],
+                                  ].join(','),
+                                  id: sch.id,
                                   title: titleController.text,
                                   description: descriptionController.text);
-                              BlocProvider.of<ScheduleBloc>(context)
-                                  .add(AddingScheduleEvent(schedule));
+                              isUpdate
+                                  ? BlocProvider.of<ScheduleBloc>(context)
+                                      .add(UpdateSchedule(schedule))
+                                  : BlocProvider.of<ScheduleBloc>(context)
+                                      .add(AddScheduleEvent(schedule));
                             }
                           }),
                     ],
@@ -140,11 +161,13 @@ class AddSchedule extends StatelessWidget {
                 ),
                 BlocConsumer<ScheduleBloc, ScheduleState>(
                   listener: (context, state) {
-                    if (state is onAddingScheduleSucess) {
+                    BlocProvider.of<ScheduleBloc>(context).add(
+                      GetRepSchedules(userId),
+                    );
+                    if (state is ScheduleCrudSuccess) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          
-                          content: Text("Schedule added Successfully"),
+                          content: Text(state.message),
                           duration: Duration(seconds: 2),
                         ),
                       );
@@ -152,27 +175,34 @@ class AddSchedule extends StatelessWidget {
                     }
                   },
                   builder: (_, state) {
-                    if (state is AddingSchedule) {
+                    if (state is ScheduleOperationsInProgress) {
                       return SpinKitDualRing(
                         color: Colors.black,
                         size: 50,
                       );
                     }
-                    if (state is FailedtoAddSchedule) {
+                    if (state is ScheduleCrudFailed) {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          
                           Text(state.message),
                           InkWell(
-                            onTap: ()=>BlocProvider.of<ScheduleBloc>(context).add(GetInitialState()),
-                            child: Text(" Try again",style: TextStyle(color: Colors.blue),))
-                                                  ,InkWell(
-                            onTap: ()=>Navigator.pop(context),
-                            child: Text(" back",style: TextStyle(color: Colors.pinkAccent),))
-
+                              onTap: () =>
+                                  BlocProvider.of<ScheduleBloc>(context)
+                                      .add(GetInitialState()),
+                              child: Text(
+                                " Try again",
+                                style: TextStyle(color: Colors.blue),
+                              )),
+                          InkWell(
+                              onTap: () => Navigator.pop(context),
+                              child: Text(
+                                " back",
+                                style: TextStyle(color: Colors.pinkAccent),
+                              ))
                         ],
-                      );                    }
+                      );
+                    }
                     return Container();
                   },
                 ),

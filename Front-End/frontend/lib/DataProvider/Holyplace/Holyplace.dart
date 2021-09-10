@@ -27,8 +27,6 @@ class HolyPlaceDataProvovider {
     dynamic responsemessage;
 
     try {
-      print("on dataprovider");
-
       final response = await http.post(
         Uri.parse('http://localhost:4000/api/createHolyPlace'),
         body: holyplaceModel.tojson(),

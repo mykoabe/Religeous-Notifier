@@ -84,6 +84,15 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: assets/fonts/Montserrat-Regular.ttf
+    - family: Merriweather
+      fonts:
+        - asset: assets/fonts/Merriweather-Light.ttf
+    - family: RobtoI
+      fonts:
+        - asset: assets/fonts/Roboto-Italic.ttf
+    - family: RobotoV
+      fonts:
+        - asset: assets/fonts/RobotoMono-VariableFont_wght.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

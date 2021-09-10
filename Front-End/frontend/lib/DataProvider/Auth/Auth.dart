@@ -29,7 +29,6 @@ class ClientAuthDataProvider {
         );
       }
 
-      print("passed dataprovider");
     } catch (e) {
       print(e.toString());
     }
@@ -81,10 +80,6 @@ class ClientAuthDataProvider {
     var result = "";
 
     try {
-      print("at DataProvider");
-      print(user.tojson());
-      print(accesstoken);
-
       final httpresponse = await http.delete(
         Uri.parse('$API_URL/DeleteProfile'),
         body: {
@@ -92,7 +87,6 @@ class ClientAuthDataProvider {
         },
         headers: {"Authorization": "${accesstoken}"},
       );
-      print("sent delete request");
       if (httpresponse.statusCode == 200) {
         result = jsonDecode(httpresponse.body).toString();
       } else if (httpresponse.statusCode == 400) {

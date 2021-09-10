@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/ApplicationState/Bloc/Holyplace/blocs.dart';
 import 'package:frontend/ApplicationState/Bloc/Holyplace/holyplace_bloc.dart';
 import 'package:frontend/ApplicationState/Bloc/Login/blocs.dart';
-import 'package:frontend/ApplicationState/Bloc/Schedule/blocs.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:frontend/ApplicationState/Bloc/Schedule/Schedule_bloc.dart';
+import 'package:frontend/ApplicationState/Bloc/Schedule/blocs.dart';
 import 'package:frontend/ApplicationState/Bloc/subscription/subscription_bloc.dart';
 import 'package:frontend/Models/models.dart';
 import 'package:frontend/Screens/DetailPage.dart';
@@ -18,9 +19,12 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    var currentLoginState = BlocProvider.of<LoginBloc>(context);
+    String id = "";
+    var loginstate = BlocProvider.of<LoginBloc>(context).state;
     var holyplacesstate = BlocProvider.of<HolyPlaceBloc>(context);
-
+    if (loginstate is Logedin) {
+      id = loginstate.loggedinUserinfo.id!;
+    }
     return Scaffold(
         drawer: Drawer(
             child: ListView(
@@ -66,18 +70,45 @@ class _MainScreenState extends State<MainScreen> {
               )),
           actions: [
             Container(
-              child: BlocBuilder<LoginBloc, LoginState>(
+              child: BlocBuilder<ScheduleBloc, ScheduleState>(
                 builder: (context, state) {
-                  if (state is Logedin) {
-                    return GestureDetector(
-                      child: Icon(
-                        Icons.notification_add,
-                        color: Colors.red,
+                  if (state is NotSeenNumberFound) {
+                    return Stack(children: [
+                      IconButton(
+                        icon: Icon(Icons.notifications,
+                            size: 40, color: Colors.grey),
+                        onPressed: () {
+                          BlocProvider.of<ScheduleBloc>(context)
+                              .add(GetNotSeenSchedules(id));
+                          Navigator.pushNamed(context, '/allprograms');
+                        },
                       ),
-                      onTap: () {
-                        Navigator.pushNamed(context, '/allscubscription');
-                      },
-                    );
+                      state.notSeenNumber > 0
+                          ? Positioned(
+                              right: 1,
+                              top: 20,
+                              child: new Container(
+                                padding: EdgeInsets.all(2),
+                                decoration: new BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                constraints: BoxConstraints(
+                                  minWidth: 14,
+                                  minHeight: 14,
+                                ),
+                                child: Text(
+                                  '${state.notSeenNumber}',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            )
+                          : Container(),
+                    ]);
                   }
                   return Container();
                 },
@@ -92,15 +123,17 @@ class _MainScreenState extends State<MainScreen> {
                         onSelected: (value) {
                           switch (value) {
                             case 1:
-                              currentLoginState.add(LogoutEvent());
+                              BlocProvider.of<LoginBloc>(context)
+                                  .add(LogoutEvent());
                               Navigator.pushNamed(context, '/');
                               break;
                             case 2:
                               Navigator.pushNamed(context, "/accountsettings");
                               break;
                             case 3:
-                              BlocProvider.of<SubscriptionBloc>(context)
-                                  .add(GetlAllSubscriptions(id: state.loggedinUserinfo.id!));
+                              BlocProvider.of<SubscriptionBloc>(context).add(
+                                  GetlAllSubscriptions(
+                                      id: state.loggedinUserinfo.id!));
 
                               Navigator.pushNamed(context, "/allscubscription");
                               break;
@@ -264,6 +297,8 @@ class _MainScreenState extends State<MainScreen> {
                                     // );
                                     BlocProvider.of<HolyPlaceBloc>(context)
                                         .add(LoadingHolyPlacesEvent());
+                                    BlocProvider.of<ScheduleBloc>(context)
+                                        .add(GetNotSeenNumber(id));
                                   }
                                 },
                                 child: BlocBuilder<LoginBloc, LoginState>(
