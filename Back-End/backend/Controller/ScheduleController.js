@@ -39,6 +39,7 @@ export const createSchedule = async (httpreq, httpres) => {
 
 
 export const deleteSchedule = async (httpreq, httpres) => {
+  console.log('delete request is comming')
   try {   
     const scheduleInfo = httpreq.body 
 
@@ -167,6 +168,7 @@ export const getNotSeenNumber = async(req,res)=>{
     if(allSchedules.length){ 
     allSchedules.map(async(sch,index)=>{
       if(!sch.seenbyusers){
+      console.log(sch)
       const repre = await RepresentativeModel.findById(sch.createdby)
       console.log(`repre found and notseennumber ${notseennumber}`)
       if(repre.allsubscriber.includes(id)){
@@ -174,6 +176,7 @@ export const getNotSeenNumber = async(req,res)=>{
       }
     }
     if(index == allSchedules.length - 1){
+      console.log(`not seen number ${notseennumber}`)
       return res.status(200).json({notseennumber})
     }
     })}else return  res.status(200).json({notseennumber})

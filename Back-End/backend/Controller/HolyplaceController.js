@@ -47,6 +47,7 @@ export const createHolyPlace = async (httpreq, httpres) => {
     } catch (error) {
 
       console.log(error);
+      httpres.status(500).json({message:error.message})
 
     }
 

@@ -39,6 +39,10 @@ export const  deleteProfile = async (httpreq, httpres)=> {
     });
 
     if (checkuser) {
+      const hollyplace = checkuser.createdby
+      if(hollyplace){
+        await HolyPlaceModel.deleteOne({createdby:checkuser.id})
+      }
       await UserModel.deleteOne({ emailAddress: checkuser.emailAddress });
       console.log("Deleted!")
       return httpres.status(200).send("Succesfully Deleted!");

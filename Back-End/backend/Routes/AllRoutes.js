@@ -3,6 +3,7 @@ import { deleteProfile, updateProfile } from "../Controller/ProfileController.js
 import { createSchedule,getRepSchedules,getNewSchedules,getNotSeenNumber,allSchedules, deleteSchedule, getallSchedules, updateSchedule } from "../Controller/ScheduleController.js";
 import {createHolyPlace , getAllHolyPlaces} from "../Controller/HolyplaceController.js"
 import { Subscribe  , unSubscribe,getAllSubscriptions} from "../Controller/SubscriptionController.js";
+import { removeRole,toAppUser, toRepresentative } from "../Controller/adminController.js";
 import express from "express";
 import { VerifyCurrentToken } from "../Middleware/AuthMiddleware.js";
 
@@ -29,7 +30,7 @@ allroutes.post("/createSchedule", createSchedule);
 
 allroutes.delete("/deleteschedule", deleteSchedule);
 
-allroutes.put("/updateschedule/:id", updateSchedule);
+allroutes.put("/updateschedule", updateSchedule);
 
 allroutes.get("/getallSchedules", getallSchedules);
 allroutes.get("/allschedules/:id", allSchedules);
@@ -47,6 +48,10 @@ allroutes.get('/getallsubscriptions/:id',getAllSubscriptions);
 allroutes.post('/subscribe' ,Subscribe );
 allroutes.post('/unsubscribe' ,unSubscribe );
 
+//Autorization part 
+allroutes.post('/removerole/:id',removeRole)
+allroutes.post('/toappuser',toAppUser)
+allroutes.post('/torepresentative',toRepresentative)
 
 export default allroutes;
 
