@@ -14,7 +14,7 @@ const RepresentativeFields = {
         ref:'AppUser'
     }],
     
-      postedSchedules :[
+    postedSchedules :[
           {
         type:Schema.Types.ObjectId,
         ref:'Schedule',

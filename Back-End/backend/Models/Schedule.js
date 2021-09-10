@@ -21,6 +21,11 @@ const ScheduleFields = {
     type: Date,
     default: Date.now,
   },
+  seenbyusers:{
+    type:Boolean,
+    default:false,
+  }
+  ,
   programs: [{
     type: String,
     required: true,

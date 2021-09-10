@@ -1,6 +1,6 @@
 import { Signup, Login , getallusers } from "../Controller/AuthController.js";
 import { deleteProfile, updateProfile } from "../Controller/ProfileController.js";
-import { createSchedule, deleteSchedule, getallSchedules, updateSchedule } from "../Controller/ScheduleController.js";
+import { createSchedule,getRepSchedules,getNewSchedules,getNotSeenNumber,allSchedules, deleteSchedule, getallSchedules, updateSchedule } from "../Controller/ScheduleController.js";
 import {createHolyPlace , getAllHolyPlaces} from "../Controller/HolyplaceController.js"
 import { Subscribe  , unSubscribe,getAllSubscriptions} from "../Controller/SubscriptionController.js";
 import express from "express";
@@ -27,11 +27,15 @@ allroutes.get("/getAllUsers" ,getallusers )
 
 allroutes.post("/createSchedule", createSchedule);
 
-allroutes.delete("/deleteSchedule/:id?", deleteSchedule);
+allroutes.delete("/deleteschedule", deleteSchedule);
 
-allroutes.put("/updateSchedule", updateSchedule);
+allroutes.put("/updateschedule/:id", updateSchedule);
 
 allroutes.get("/getallSchedules", getallSchedules);
+allroutes.get("/allschedules/:id", allSchedules);
+allroutes.get("/getnewschedules/:id", getNewSchedules);
+allroutes.get("/getnotseennumber/:id", getNotSeenNumber);
+allroutes.get("/getrepschedules/:id", getRepSchedules);
 
 //HolyPlace 
 

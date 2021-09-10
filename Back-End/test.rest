@@ -12,3 +12,11 @@ Content-Type: application/json
     "userName":"daveSange",
     "password":"dave"
 }
+###
+PUT http://localhost:4000/api/updateschedule/
+Content-Type: application/json
+
+{
+ "id":"613f0b5f69c9599f81b6d576",
+ "title":"this is updated by me"   
+}
