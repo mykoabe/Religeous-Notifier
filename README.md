@@ -10,11 +10,3 @@ functionalities:
 
 
 
-Group Members:
-1. Hailemariam Fikadie  ETR/4338/11
-2. Dawit Teklu - NSR/2792/11
-3. Nuredin YESUF atr/0100/11
-4. Mekuanint Abebe ATR/0022/11
-5. Elshaday Abebe ATR/6947/11
-
-
